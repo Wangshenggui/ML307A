@@ -76,4 +76,5 @@ out/build/custom/custom_main/src/gps.o: custom/custom_main/src/gps.c \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\time.h \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\machine\time.h \
  custom/custom_main/inc/tcp.h \
- f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\math.h
+ f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\math.h \
+ include\cmiot/cm_http.h

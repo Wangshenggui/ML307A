@@ -8,7 +8,7 @@ char info3[100];
 int sockfd;
 struct sockaddr_in serv_addr;
 
-struct addrinfo hints, *res, *p;
+struct addrinfo hints, * res, * p;
 int status;
 // 移动cors 120.253.226.97
 // 百度鹰眼  163.177.17.114
@@ -49,13 +49,13 @@ uint8_t TCPrxBuf1[400];
 uint8_t TCPrxBuf2[1200];
 uint8_t TCPrxBuf3[400];
 
-char SendStr[1000] = {0};
+char SendStr[1000] = { 0 };
 char tempString[200];
 
 int timeout = 0;
 int timeout1 = 0;
 
-char *delimiter = "\r\n";
+char* delimiter = "\r\n";
 double wgs84_lon = 0;
 double wgs84_lat = 0;
 
@@ -69,10 +69,10 @@ int count1 = 0;
 int count2 = 0;
 int count3 = 0;
 int count4 = 0;
-void print_ipv4_address(const char *hostname)
+void print_ipv4_address(const char* hostname)
 {
 
-    struct addrinfo hints, *res, *p;
+    struct addrinfo hints, * res, * p;
     int status;
     // u1_printf("1\r\n\r\n");
     int found = 1; // 用于标记是否找到了IPv4地址
@@ -96,8 +96,8 @@ void print_ipv4_address(const char *hostname)
         for (p = res; p != NULL; p = p->ai_next)
         {
 
-            struct sockaddr_in *ipv4 = (struct sockaddr_in *)p->ai_addr;
-            if (inet_ntop(AF_INET, &ipv4->sin_addr, (void *)ipstr, sizeof ipstr) != NULL)
+            struct sockaddr_in* ipv4 = (struct sockaddr_in*)p->ai_addr;
+            if (inet_ntop(AF_INET, &ipv4->sin_addr, (void*)ipstr, sizeof ipstr) != NULL)
             {
 
                 //  u1_printf("%s  IPv4 Address:%s",hostname,ipstr);
@@ -110,10 +110,10 @@ void print_ipv4_address(const char *hostname)
     }
 }
 
-void print_ipv4_address1(const char *hostname)
+void print_ipv4_address1(const char* hostname)
 {
 
-    struct addrinfo hints, *res, *p;
+    struct addrinfo hints, * res, * p;
     int status;
     // u1_printf("1\r\n\r\n");
     int found = 1; // 用于标记是否找到了IPv4地址
@@ -137,8 +137,8 @@ void print_ipv4_address1(const char *hostname)
         for (p = res; p != NULL; p = p->ai_next)
         {
 
-            struct sockaddr_in *ipv4 = (struct sockaddr_in *)p->ai_addr;
-            if (inet_ntop(AF_INET, &ipv4->sin_addr, (void *)baiduipstr, sizeof baiduipstr) != NULL)
+            struct sockaddr_in* ipv4 = (struct sockaddr_in*)p->ai_addr;
+            if (inet_ntop(AF_INET, &ipv4->sin_addr, (void*)baiduipstr, sizeof baiduipstr) != NULL)
             {
 
                 //  u1_printf("%s  IPv4 Address:%s",hostname,ipstr);
@@ -162,13 +162,13 @@ void Waitnet()
             u1_printf("The system will restart!\r\n");
         }
         if (cm_modem_get_pdp_state(1) == 1)
-        { 
+        {
             u1_printf("network ok!\r\n");
             break;
         }
         timeout++;
         u1_printf("Waiting for networking  %d\r\n", timeout);
-     
+
         Delay(1000);
     }
 }
@@ -225,7 +225,7 @@ input2:
     u1_printf("SERVER_IP: %s\n", baiduipstr);
 
     // 尝试连接到服务器
-    if (connect(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
+    if (connect(sockfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0)
     {
         u1_printf("connection failed\n");
         goto input2;
@@ -236,13 +236,13 @@ input2:
     while (1)
     {
 
-        ParseGPGGA((char *)GGAString, 2);
-        ParseGPGGA((char *)GGAString, 4);
-        ParseGPGGA((char *)GGAString, 6);
-        ParseGPGGA((char *)GGAString, 7);
-        ParseGPGGA((char *)GGAString, 9);
+        ParseGPGGA((char*)GGAString, 2);
+        ParseGPGGA((char*)GGAString, 4);
+        ParseGPGGA((char*)GGAString, 6);
+        ParseGPGGA((char*)GGAString, 7);
+        ParseGPGGA((char*)GGAString, 9);
 
-        ParseGPRMC((char *)RMCString, 7);
+        ParseGPRMC((char*)RMCString, 7);
 
         wgs84_lon = dms_to_degrees(GPGGA_Struct.Longitude);
         wgs84_lat = dms_to_degrees(GPGGA_Struct.Latitude);
@@ -268,25 +268,25 @@ input2:
 \"rtknum\":%d,\
 \"altitude\":%0.2f\
 }",
-                    bd09_lon,
-                    bd09_lat,
-                    GPGGA_Struct.PositioningMode,
-                    GPRMC_Struct.Speed,
-                    GPGGA_Struct.sats,
-                    // SLAVE_Struct.Slave_State[0],
-                    // SLAVE_Struct.Slave_State[1],
-                    // SLAVE_Struct.Slave_State[2],
-                    // SLAVE_Struct.Slave_State[3],
-                    // SLAVE_Struct.ReadSpeed1[0],
-                    // SLAVE_Struct.ReadSpeed1[1],
-                    // SLAVE_Struct.ReadSpeed1[2],
-                    // SLAVE_Struct.ReadSpeed1[3],
-                    // SLAVE_Struct.ReadSpeed2[0],
-                    // SLAVE_Struct.ReadSpeed2[1],
-                    // SLAVE_Struct.ReadSpeed2[2],
-                    // SLAVE_Struct.ReadSpeed2[3],
+bd09_lon,
+bd09_lat,
+GPGGA_Struct.PositioningMode,
+GPRMC_Struct.Speed,
+GPGGA_Struct.sats,
+// SLAVE_Struct.Slave_State[0],
+// SLAVE_Struct.Slave_State[1],
+// SLAVE_Struct.Slave_State[2],
+// SLAVE_Struct.Slave_State[3],
+// SLAVE_Struct.ReadSpeed1[0],
+// SLAVE_Struct.ReadSpeed1[1],
+// SLAVE_Struct.ReadSpeed1[2],
+// SLAVE_Struct.ReadSpeed1[3],
+// SLAVE_Struct.ReadSpeed2[0],
+// SLAVE_Struct.ReadSpeed2[1],
+// SLAVE_Struct.ReadSpeed2[2],
+// SLAVE_Struct.ReadSpeed2[3],
 
-                    GPGGA_Struct.Height);
+GPGGA_Struct.Height);
 
             sprintf(strx2, "\
 {\"S1\":%d,\
@@ -302,26 +302,26 @@ input2:
 \"r7\":%d,\
 \"r8\":%d\
 }",
-                    SLAVE_Struct.Slave_State[0],
-                    SLAVE_Struct.Slave_State[1],
-                    SLAVE_Struct.Slave_State[2],
-                    SLAVE_Struct.Slave_State[3],
-                    SLAVE_Struct.ReadSpeed1[0],
-                    SLAVE_Struct.ReadSpeed1[1],
-                    SLAVE_Struct.ReadSpeed1[2],
-                    SLAVE_Struct.ReadSpeed1[3],
-                    SLAVE_Struct.ReadSpeed2[0],
-                    SLAVE_Struct.ReadSpeed2[1],
-                    SLAVE_Struct.ReadSpeed2[2],
-                    SLAVE_Struct.ReadSpeed2[3]);
+SLAVE_Struct.Slave_State[0],
+SLAVE_Struct.Slave_State[1],
+SLAVE_Struct.Slave_State[2],
+SLAVE_Struct.Slave_State[3],
+SLAVE_Struct.ReadSpeed1[0],
+SLAVE_Struct.ReadSpeed1[1],
+SLAVE_Struct.ReadSpeed1[2],
+SLAVE_Struct.ReadSpeed1[3],
+SLAVE_Struct.ReadSpeed2[0],
+SLAVE_Struct.ReadSpeed2[1],
+SLAVE_Struct.ReadSpeed2[2],
+SLAVE_Struct.ReadSpeed2[3]);
 
-            if (send(sockfd, strx1, strlen((char *)strx1), 0) < 0)
+            if (send(sockfd, strx1, strlen((char*)strx1), 0) < 0)
             {
                 u1_printf("send failed\r\n");
                 goto input2;
             }
             Delay(0);
-            if (send(sockfd, strx2, strlen((char *)strx2), 0) < 0)
+            if (send(sockfd, strx2, strlen((char*)strx2), 0) < 0)
             {
                 u1_printf("send failed\r\n");
                 goto input2;
@@ -340,10 +340,10 @@ input2:
             }
             cm_uart_write(CM_UART_DEV_1, TCPrxBuf3, strlen((char*)TCPrxBuf3), 1000);
 
-// uint32_t a1 = osThreadGetStackSpace(GetCors);
-//              u1_printf("GetCors:%ld",a1 );
-//       uint32_t a2 =osThreadGetStackSpace(UpBaidu);       
-//              u1_printf("UpBaidu:%ld", a2);
+            // uint32_t a1 = osThreadGetStackSpace(GetCors);
+            //              u1_printf("GetCors:%ld",a1 );
+            //       uint32_t a2 =osThreadGetStackSpace(UpBaidu);       
+            //              u1_printf("UpBaidu:%ld", a2);
             memset(TCPrxBuf3, 0, sizeof(TCPrxBuf3));
             Delay(350);
         }
@@ -394,7 +394,7 @@ input:
     // u1_printf("SERVER_IP: %s\n", ipstr);
 
     // 尝试连接到服务器
-    if (connect(Corssockfd, (struct sockaddr *)&Corsserv_addr, sizeof(Corsserv_addr)) < 0)
+    if (connect(Corssockfd, (struct sockaddr*)&Corsserv_addr, sizeof(Corsserv_addr)) < 0)
     {
         u1_printf("connection failed\n");
 
@@ -448,30 +448,30 @@ input:
 
     while (1)
     {
-        if (strlen((char *)GGAString) > 41)
+        if (strlen((char*)GGAString) > 41)
         {
-            sprintf((char *)GGAString1, "%s%c%c", (char *)GGAString, 0x0D, 0x0A);
-            if (send(Corssockfd, GGAString1, strlen((char *)GGAString1), 0) < 0)
+            sprintf((char*)GGAString1, "%s%c%c", (char*)GGAString, 0x0D, 0x0A);
+            if (send(Corssockfd, GGAString1, strlen((char*)GGAString1), 0) < 0)
             {
                 u1_printf("send failed\r\n");
                 goto input;
-                exit(EXIT_FAILURE);
+                //exit(EXIT_FAILURE);
             }
             //   u0_printf("%s", GGAString1);
-Delay(10);
+            Delay(10);
             if (recv(Corssockfd, TCPrxBuf2, sizeof(TCPrxBuf2), 0) < 0)
             {
                 u1_printf("recive failed\r\n");
                 goto input;
-                exit(EXIT_FAILURE);
+                //exit(EXIT_FAILURE);
             }
             cm_uart_write(CM_UART_DEV_0, TCPrxBuf2, sizeof(TCPrxBuf2), 1000);
             // u1_printf("%s", TCPrxBuf3);
 
             // memset(TCPrxBuf3,0,sizeof(TCPrxBuf3));
             Delay(1000);
+            count2 = 0;
         }
-
         else
         {
             count2++;
@@ -486,13 +486,13 @@ Delay(10);
         }
     }
 
-    close(Corssockfd);
+    //close(Corssockfd);
 }
 
 void swit(void)
 {
 
-    ParseCORS((char *)inf1, 1);
+    ParseCORS((char*)inf1, 1);
     if (CORS_Struct.Domain == '0')
     {
         cm_pm_reboot();
@@ -506,7 +506,7 @@ void swit(void)
     {
         sprintf(Corsipstr, "%s", "rtk.ntrip.qxwz.com");
     }
-    ParseCORS((char *)inf1, 2);
+    ParseCORS((char*)inf1, 2);
     if (CORS_Struct.Port == '3')
     {
         CORSport = 8001;
@@ -515,7 +515,7 @@ void swit(void)
     {
         CORSport = 8002;
     }
-    ParseCORS((char *)inf1, 3);
+    ParseCORS((char*)inf1, 3);
     if (CORS_Struct.Mount == 5)
     {
         sprintf(CORScount, "%s", "RTCM33_GRCEJ");
@@ -545,5 +545,5 @@ void swit(void)
         sprintf(CORScount, "%s", "RTCM30_GG");
     }
 
-    ParseCORS((char *)inf1, 4);
+    ParseCORS((char*)inf1, 4);
 }

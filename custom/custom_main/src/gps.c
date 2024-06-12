@@ -5,10 +5,10 @@
 #include <math.h>
 
 
- uint8_t GGAString[100];
- uint8_t GGAString1[200];
- uint8_t RMCString[100];
- uint8_t GSVString[100];
+uint8_t GGAString[100];
+uint8_t GGAString1[200];
+uint8_t RMCString[100];
+uint8_t GSVString[100];
 
 
 double x_PI = 3.14159265358979323846 * 3000.0 / 180.0;
@@ -99,7 +99,7 @@ void ParseGPGGA(const char* string, int n)
     int i = 0;
     unsigned char len = 0;//计算字符串长度
     char checksum_str[3];
-       
+
     //计算长度
     while (string[len] != '\0')len++;
     // 计算数据的异或和
@@ -114,7 +114,7 @@ void ParseGPGGA(const char* string, int n)
     if (strncmp(checksum_str, (const char*)&string[i + 1], 2) == 0) //通过 
     {
 
-     
+
         // 定位到第n个逗号
         for (int i = 0; i < n; i++)
         {
@@ -171,12 +171,12 @@ void ParseGPGGA(const char* string, int n)
 
             break;
         case(6)://定位状态
-                substring(GPGGA_Struct.str, result, 0, strlen(result));
-            GPGGA_Struct.PositioningMode = (int)atoi(GPGGA_Struct.str); 
+            substring(GPGGA_Struct.str, result, 0, strlen(result));
+            GPGGA_Struct.PositioningMode = (int)atoi(GPGGA_Struct.str);
             // GPGGA_Struct.PositioningMode = result[0];
             // sprintf(GPGGA_Struct.PositioningMode1,"%s",result);
             break;
-                case(7)://使用的卫星数量
+        case(7)://使用的卫星数量
             substring(GPGGA_Struct.str, result, 0, strlen(result));
             GPGGA_Struct.sats = (int)atoi(GPGGA_Struct.str);
             break;
@@ -219,9 +219,6 @@ void ParseGPRMC(const char* string, int n)
     sprintf(checksum_str, "%02X", xor_sum);
     if (strncmp(checksum_str, (const char*)&string[i + 1], 2) == 0) //通过 
     {
-
-
-
         // 定位到第n个逗号
         for (int i = 0; i < n; i++) {
             start = strchr(start, ',');
@@ -334,8 +331,8 @@ void ParseGPRMC(const char* string, int n)
             GPRMC_Struct.LongitudeDir = result[0];
             break;
         case(7)://地面速度
-        //              
-            GPRMC_Struct.Speed = (float)atof(result)*1.852;
+            //              
+            GPRMC_Struct.Speed = (float)atof(result) * 1.852;
             break;
         case(8)://航向角
             GPRMC_Struct.CourseAngle = (float)atof(result);
@@ -349,7 +346,7 @@ void ParseGPRMC(const char* string, int n)
             substring(GPRMC_Struct.str, result, 4, 2);
             GPRMC_Struct.Year = (uint8_t)atof(GPRMC_Struct.str) + 2000;
 
-           // u1_printf("日期：%d-%d-%d\r\n", GPRMC_Struct.Year, GPRMC_Struct.Month, GPRMC_Struct.Day);
+            // u1_printf("日期：%d-%d-%d\r\n", GPRMC_Struct.Year, GPRMC_Struct.Month, GPRMC_Struct.Day);
             break;
         case(12)://定位模式
             GPRMC_Struct.ModeIndicator = result[0];
@@ -364,6 +361,7 @@ void ParseGPRMC(const char* string, int n)
 
 
 #include <stdbool.h>
+#include <cm_http.h>
 bool outof_China(double lon, double lat)
 {
     return(lon < 72.004 || lon>137.8374 || lat < 0.8293 || lat >55.8271 || false);
@@ -425,7 +423,7 @@ double dms_to_degrees(double dms)  //2623.0546
 {             //degrees =26
     double degrees = (int)(dms / 100);  // 取整数部分作为度数
 
-                    //2623.0546-26*100=23.0546
+    //2623.0546-26*100=23.0546
     double minutes = dms - degrees * 100; // 取小数部分作为分数
 
 
@@ -446,7 +444,7 @@ long long format_time_to_timestamp(uint16_t Y, uint16_t M, uint16_t D, uint16_t 
     timeinfo.tm_sec = s;
     // 转换为时间戳
     timestamp = mktime(&timeinfo);
-    
+
     return timestamp;
 }
 

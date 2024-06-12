@@ -1,15 +1,15 @@
 #include "uart.h"
 
-char* delimiter1= "\r\n";
+char* delimiter1 = "\r\n";
 
 osSemaphoreId_t u0_uart_sem = NULL;
 osSemaphoreId_t u1_uart_sem = NULL;
 uint8_t corsString[100];
 
-    char inf1[100];
-      char inf2[100];
-      char inf3[100];
-void u0_printf(char *str, ...)
+char inf1[100];
+char inf2[100];
+char inf3[100];
+void u0_printf(char* str, ...)
 {
     va_list args;
     int len;
@@ -20,12 +20,12 @@ void u0_printf(char *str, ...)
     }
 
     va_start(args, str);
-    len = vsnprintf((char *)txBuff0, 400, str, args);
+    len = vsnprintf((char*)txBuff0, 400, str, args);
     va_end(args);
     cm_uart_write(CM_UART_DEV_0, txBuff0, len, 1000);
 }
 
-void u1_printf(char *str, ...)
+void u1_printf(char* str, ...)
 {
     va_list args1;
     int len;
@@ -36,12 +36,12 @@ void u1_printf(char *str, ...)
     }
 
     va_start(args1, str);
-    len = vsnprintf((char *)txBuff1, 400, str, args1);
+    len = vsnprintf((char*)txBuff1, 400, str, args1);
     va_end(args1);
     cm_uart_write(CM_UART_DEV_1, txBuff1, len, 1000);
 }
 
-void u0_callback(void *param, uint32_t type)
+void u0_callback(void* param, uint32_t type)
 {
 
     if (CM_UART_EVENT_TYPE_RX_ARRIVED & type)
@@ -56,7 +56,7 @@ void u0_callback(void *param, uint32_t type)
     }
 }
 
-void u1_callback(void *param, uint32_t type)
+void u1_callback(void* param, uint32_t type)
 {
 
     if (CM_UART_EVENT_TYPE_RX_ARRIVED & type)
@@ -70,20 +70,20 @@ void u1_callback(void *param, uint32_t type)
     }
 }
 
-void uart_open(cm_uart_dev_e dev, int baudrate, void *callback)
+void uart_open(cm_uart_dev_e dev, int baudrate, void* callback)
 {
     cm_uart_cfg_t config =
-        {
-            CM_UART_BYTE_SIZE_8,
-            CM_UART_PARITY_NONE,
-            CM_UART_STOP_BIT_ONE,
-            CM_UART_FLOW_CTRL_NONE,
-            baudrate};
+    {
+        CM_UART_BYTE_SIZE_8,
+        CM_UART_PARITY_NONE,
+        CM_UART_STOP_BIT_ONE,
+        CM_UART_FLOW_CTRL_NONE,
+        baudrate };
     cm_uart_event_t event =
-        {
-            CM_UART_EVENT_TYPE_RX_ARRIVED | CM_UART_EVENT_TYPE_RX_OVERFLOW,
-            "NULL",
-            callback};
+    {
+        CM_UART_EVENT_TYPE_RX_ARRIVED | CM_UART_EVENT_TYPE_RX_OVERFLOW,
+        "NULL",
+        callback };
 
     if (dev == CM_UART_DEV_0)
     {
@@ -115,39 +115,39 @@ void uart_open(cm_uart_dev_e dev, int baudrate, void *callback)
     }
 }
 
-int u0_uart_read(char *data)
+int u0_uart_read(char* data)
 {
     int ret = EOF;
     memset(data, 0, strlen(data));
-    ret = cm_uart_read(CM_UART_DEV_0, (void *)data, 256, 1000);
+    ret = cm_uart_read(CM_UART_DEV_0, (void*)data, 256, 1000);
     return ret;
 }
 
-int u1_uart_read(char *data)
+int u1_uart_read(char* data)
 {
     int ret = EOF;
     memset(data, 0, strlen(data));
-    ret = cm_uart_read(CM_UART_DEV_1, (void *)data, 256, 1000);
+    ret = cm_uart_read(CM_UART_DEV_1, (void*)data, 256, 1000);
     return ret;
 }
 
 void open_uart(void)
 {
-//cm_mem_get_heap_stats();
+    //cm_mem_get_heap_stats();
     uart_open(CM_UART_DEV_0, 115200, u0_callback);
     uart_open(CM_UART_DEV_1, 115200, u1_callback);
-   // cm_uart_write(CM_UART_DEV_0, "System Star!" ,12, 1000);
-   // cm_uart_write(CM_UART_DEV_1, "System Star!" ,12, 1000);
+    // cm_uart_write(CM_UART_DEV_0, "System Star!" ,12, 1000);
+    // cm_uart_write(CM_UART_DEV_1, "System Star!" ,12, 1000);
 
-    // u1_printf("System ok!\r\n");
-    // u0_printf("System ok!\r\n");
-    // u0_uart_read(rxBuff0);
-    // u1_uart_read(rxBuff1);
+     // u1_printf("System ok!\r\n");
+     // u0_printf("System ok!\r\n");
+     // u0_uart_read(rxBuff0);
+     // u1_uart_read(rxBuff1);
 
- 
+
 }
 
-void u1_read(char *param)
+void u1_read(char* param)
 {
     // int ret0=u0_uart_read(rxBuff0);
     // int ret1=u1_uart_read(rxBuff1);
@@ -160,30 +160,30 @@ void u1_read(char *param)
         u1_uart_read((char*)rxBuff2);
         // u0_printf("%s",rxBuff1);
 
-        
+
         separateString((char*)rxBuff1, (char*)delimiter1, (char*)info1, (char*)info2, (char*)info3);
-               // u0_printf("\n%s\n",info1);
+        // u0_printf("\n%s\n",info1);
         processInfo((uint8_t*)info1, (uint8_t*)info2, (uint8_t*)info1, RMCString, GGAString, GGAString, 102);
-       separateString((char*)rxBuff2, (char*)delimiter1, (char*)inf1, (char*)inf2, (char*)inf3);
-          // u1_printf("inf1:%s\n", inf1);
-       if (inf1[0] == '$' && inf1[1] == 'C' && inf1[2] == 'O' && inf1[3] == 'R' && inf1[4] == 'S')
-       {
-           swit();
-       }
-//cm_uart_write(CM_UART_DEV_1, "SystemOK!" ,12, 1000);
-        // u1_printf("recive GGAString:  %s",GGAString);
+        separateString((char*)rxBuff2, (char*)delimiter1, (char*)inf1, (char*)inf2, (char*)inf3);
+        // u1_printf("inf1:%s\n", inf1);
+        if (inf1[0] == '$' && inf1[1] == 'C' && inf1[2] == 'O' && inf1[3] == 'R' && inf1[4] == 'S')
+        {
+            swit();
+        }
+        //cm_uart_write(CM_UART_DEV_1, "SystemOK!" ,12, 1000);
+                // u1_printf("recive GGAString:  %s",GGAString);
 
-       else if (inf1[0] == '$' && inf1[1] == 'S' && inf1[2] == 'L' && inf1[3] == 'A' && inf1[4] == 'V')
-       {
-          // u1_printf(">>>>>%s\r\n", inf1);
+        else if (inf1[0] == '$' && inf1[1] == 'S' && inf1[2] == 'L' && inf1[3] == 'A' && inf1[4] == 'V')
+        {
+            // u1_printf(">>>>>%s\r\n", inf1);
 
-           for (int i = 1; i < 24; i++)
-           {
-               ParseSLAVE(inf1, i);
-           }
+            for (int i = 1; i < 24; i++)
+            {
+                ParseSLAVE(inf1, i);
+            }
 
-       }
-       
+        }
+
 
         Delay(300);
     }
@@ -290,28 +290,27 @@ void ParseCORS(const char* string, int n)
 
         switch (n)
         {
-       
+
         case(1)://域名号
-          
+
             CORS_Struct.Domain = result[0];
-         //   u1_printf("CORS_Struct.Domain :%c\n", CORS_Struct.Domain );
+            //   u1_printf("CORS_Struct.Domain :%c\n", CORS_Struct.Domain );
             break;
-      
+
         case(2)://端口号
-             CORS_Struct.Port = result[0];
+            CORS_Struct.Port = result[0];
             break;
         case(3)://挂载点号
-        CORS_Struct.Mount = atoi(result);
-          //   CORS_Struct.Mount = result[0];
+            CORS_Struct.Mount = atoi(result);
+            //   CORS_Struct.Mount = result[0];
             break;
-      
+
         case(4)://密文
-             sprintf(CORS_Struct.accpass,"%s",result);
+            sprintf(CORS_Struct.accpass, "%s", result);
             // u0_printf("@%s\n",CORS_Struct.accpass);
             break;
 
         }
-        
+
     }
 }
-
