@@ -1,0 +1,147 @@
+[
+   {
+      "command" : "require",
+      "group" : "0",
+      "name" : "product",
+      "value" : "arom-tiny"
+   },
+   {
+      "command" : "require",
+      "group" : "0",
+      "name" : "version",
+      "value" : "0.5"
+   },
+   {
+      "command" : "require",
+      "group" : "0",
+      "name" : "version-bootrom",
+      "value" : "2021.10.16"
+   },
+   {
+      "command" : "progress",
+      "group" : "0",
+      "name" : "weight",
+      "value" : 13213696
+   },
+   {
+      "command" : "call",
+      "group" : "0",
+      "image" : "preboot.img"
+   },
+   {
+      "command" : "call",
+      "group" : "0",
+      "image" : "flasher.img"
+   },
+   {
+      "command" : "partition",
+      "group" : "0",
+      "image" : "flashinfo.bin"
+   },
+   {
+      "command" : "partition",
+      "group" : "0",
+      "image" : "partition.bin"
+   },
+   {
+      "command" : "flash",
+      "group" : "1",
+      "image" : "bootloader.ubi",
+      "partition" : "bootloader",
+      "weight" : 172032
+   },
+   {
+      "command" : "flash",
+      "group" : "2",
+      "image" : "partition.bin",
+      "partition" : "ptable",
+      "weight" : 8192
+   },
+   {
+      "command" : "flash",
+      "group" : "2",
+      "image" : "fwcerts.bin",
+      "partition" : "fwcerts",
+      "weight" : 16384
+   },
+   {
+      "command" : "flash",
+      "group" : "2",
+      "image" : "ReliableData.bin",
+      "partition" : "rd",
+      "weight" : 65536
+   },
+   {
+      "command" : "flash",
+      "group" : "2",
+      "image" : "apn.bin",
+      "partition" : "apn",
+      "weight" : 61440
+   },
+   {
+      "command" : "flash",
+      "group" : "2",
+      "image" : "cp.bin",
+      "partition" : "cp",
+      "weight" : 10362880
+   },
+   {
+      "command" : "flash",
+      "group" : "2",
+      "image" : "dsp.bin",
+      "partition" : "dsp",
+      "weight" : 196608
+   },
+   {
+      "command" : "flash",
+      "group" : "2",
+      "image" : "rf.bin",
+      "partition" : "rfbin",
+      "weight" : 8192
+   },
+   {
+      "command" : "flash",
+      "group" : "2",
+      "image" : "logo.bin",
+      "partition" : "logo",
+      "weight" : 49152
+   },
+   {
+      "command" : "flash",
+      "group" : "2",
+      "image" : "updater.bin",
+      "partition" : "updater",
+      "weight" : 126976
+   },
+   {
+      "command" : "erase",
+      "group" : "3",
+      "partition" : "fota_param",
+      "weight" : 12288
+   },
+   {
+      "command" : "erase",
+      "group" : "3",
+      "partition" : "fota_pkg",
+      "weight" : 4096
+   },
+   {
+      "command" : "erase",
+      "group" : "3",
+      "partition" : "user_app",
+      "weight" : 1048576
+   },
+   {
+      "command" : "erase",
+      "group" : "4",
+      "partition" : "nvm",
+      "weight" : 1048576
+   },
+   {
+      "command" : "erase",
+      "group" : "5",
+      "partition" : "factory",
+      "productionOnly" : true,
+      "weight" : 32768
+   }
+]

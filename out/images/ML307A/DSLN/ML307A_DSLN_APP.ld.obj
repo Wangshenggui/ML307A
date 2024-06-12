@@ -1,0 +1,67 @@
+OUTPUT_FORMAT("elf32-littlearm", "elf32-littlearm", "elf32-littlearm")
+OUTPUT_ARCH(arm)
+ENTRY(cm_opencpu_entry)
+MEMORY {
+    ram (rwx): ORIGIN = 0x7E380000, LENGTH = 512K
+    flash (rwx): ORIGIN = 0x805F8000, LENGTH = 1024K
+}
+SECTIONS {
+    . = ORIGIN(flash);
+    __flash_start = .;
+    .image_header : {
+        LONG(0x5A5AA5A5) LONG(__flash_end - __flash_start) LONG(__flash_start) LONG(__ram_start)
+        LONG(0) LONG(__text_lma_start - __flash_start) LONG(__text_lma_start) LONG(__text_vma_start) LONG(__text_vma_end - __text_vma_start)
+        LONG(1) LONG(__rodata_lma_start - __flash_start) LONG(__rodata_lma_start) LONG(__rodata_vma_start) LONG(__rodata_vma_end - __rodata_vma_start)
+        LONG(2) LONG(__data_lma_start - __flash_start) LONG(__data_lma_start) LONG(__data_vma_start) LONG(__data_vma_end - __data_vma_start)
+        LONG(3) LONG(__bss_lma_start - __flash_start) LONG(__bss_lma_start) LONG(__bss_vma_start) LONG(__bss_vma_end - __bss_vma_start)
+        LONG(4) LONG(__sramtext_lma_start - __flash_start) LONG(__sramtext_lma_start) LONG(__sramtext_vma_start) LONG(__sramtext_vma_end - __sramtext_vma_start)
+    } > flash
+    .text ALIGN(0x8) : {
+        __text_vma_start = .;
+        *(.text.cm_opencpu_entry)
+        EXCLUDE_FILE(*cm_stub_DSLN.o *.sram.o *lib_tts.a:)*(.text .text.* .gnu.linkonce.t.* .glue_7 .glue_7t .vfp11_veneer .v4_bx)
+        __text_vma_end = .;
+        . = ALIGN(0x8);
+        __text_lma_start = LOADADDR(.text);
+    } > flash
+    .rodata ALIGN(0x8) : {
+        __rodata_vma_start = .;
+        *(.rdata .rodata .rodata.* .gnu.linkonce.r.*)
+        __rodata_vma_end = .;
+        . = ALIGN(0x8);
+        __rodata_lma_start = LOADADDR(.rodata);
+    } > flash
+    . = ORIGIN(ram);
+    __ram_start = .;
+    .sramtext ALIGN(0x8) : {
+        __sramtext_vma_start = .;
+        *cm_stub_DSLN.o(.text .text.* .gnu.linkonce.t.* .glue_7 .glue_7t .vfp11_veneer .v4_bx)
+        *.sram.o(.text .text.* .gnu.linkonce.t.* .glue_7 .glue_7t .vfp11_veneer .v4_bx)
+        *lib_tts.a:(.text .text.* .gnu.linkonce.t.* .glue_7 .glue_7t .vfp11_veneer .v4_bx)
+        *(.sramtext)
+        __sramtext_vma_end = .;
+        . = ALIGN(0x8);
+        __sramtext_lma_start = LOADADDR(.sramtext);
+    } AT>flash
+    .data ALIGN(0x8) : {
+        __data_vma_start = .;
+        *(.data .data.* .gnu.linkonce.d.*)
+        __data_vma_end = .;
+        . = ALIGN(0x8);
+        __data_lma_start = LOADADDR(.data);
+    } AT>flash
+    .bss ALIGN(0x8) : {
+        __bss_vma_start = .;
+        *(.bss .bss.* COMMON .scommon .sbss .sbss.* .sbss2 .sbss2.* .gnu.linkonce.b.*)
+        __bss_vma_end = .;
+        . = ALIGN(0x8);
+        __bss_lma_start = LOADADDR(.bss);
+    }
+    __flash_end = LOADADDR(.data) + SIZEOF(.data);
+    __ram_end = ADDR(.bss) + SIZEOF(.bss);
+    end = __ram_end;
+    __ram_reserve = ORIGIN(ram) + LENGTH(ram) - __ram_end;
+    __flash_reserve = ORIGIN(flash) + LENGTH(flash) - __flash_end;
+    ASSERT(__flash_end <= ORIGIN(flash) + LENGTH(flash), "FLASH overflow")
+    ASSERT(__ram_end <= ORIGIN(ram) + LENGTH(ram), "RAM overflow")
+}

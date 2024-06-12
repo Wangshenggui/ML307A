@@ -1,0 +1,7 @@
+[
+   {
+      "image" : "system.img",
+      "partition" : "system",
+      "start" : 90112
+   }
+]
