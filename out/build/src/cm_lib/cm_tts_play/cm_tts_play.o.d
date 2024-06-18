@@ -23,8 +23,7 @@ out/build/src/cm_lib/cm_tts_play/cm_tts_play.o: \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\stdint.h \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\sys\_intsup.h \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\sys\_stdint.h \
- custom/custom_main/inc/cm_os.h include\cmiot/cm_mem.h \
- include\cmiot/cm_sys.h \
+ include\cmiot/cm_os.h include\cmiot/cm_mem.h include\cmiot/cm_sys.h \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\lib\gcc\arm-none-eabi\8.3.1\include\stdbool.h \
  include\cmiot/cm_audio_player.h include\cmiot/cm_audio_common.h \
  include\cmiot/cm_audio_common.h

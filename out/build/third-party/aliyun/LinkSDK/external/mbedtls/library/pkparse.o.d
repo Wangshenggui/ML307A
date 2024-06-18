@@ -44,7 +44,7 @@ out/build/third-party/aliyun/LinkSDK/external/mbedtls/library/pkparse.o: \
  third-party/aliyun/LinkSDK/external/mbedtls/include/mbedtls/pem.h \
  third-party/aliyun/LinkSDK/external/mbedtls/include/mbedtls/platform.h \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\stdio.h \
- custom/custom_main/inc/stdarg.h \
+ f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\lib\gcc\arm-none-eabi\8.3.1\include\stdarg.h \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\sys\types.h \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\machine\endian.h \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\machine\_endian.h \

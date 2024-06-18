@@ -32,6 +32,6 @@ out/build/src/cm_lib/cm_async_dns_adapt/async_dns_adapt.o: \
  include\platform\lwip\arch/cc.h include\platform\lwip/lwip/ip_addr.h \
  include\platform\lwip/lwip/def.h include\platform\lwip\ipv4/ip4_addr.h \
  include\platform\lwip\lwip/opt.h include\platform\lwip\lwip/def.h \
- include\platform\lwip\ipv6/ip6_addr.h custom/custom_main/inc/inet.h \
+ include\platform\lwip\ipv6/ip6_addr.h include\platform\lwip\ipv4/inet.h \
  include\platform\lwip\lwip/ip_addr.h include\platform\lwip\ipv6/inet6.h \
  include\platform\lwip\ipv6/ip6_addr.h include\cmiot/cm_eloop.h
