@@ -1,5 +1,6 @@
 #include "uart.h"
 #include <stdarg.h>
+#include <stdio.h>
 
 
 osSemaphoreId_t uart0_read_sem = NULL;
@@ -26,6 +27,37 @@ void u1_printf(char* str, ...)
     len = vsnprintf((char*)txBuff1, 1024, str, args);
     va_end(args);
     cm_uart_write(CM_UART_DEV_1, txBuff1, len, 5000);
+}
+
+void u0_read(char *param)
+{
+    while (1)
+    {
+        if (osSemaphoreAcquire(uart0_read_sem,osWaitForever) == osOK)
+        {
+            char receive[1024] = {0};
+
+            cm_uart_read(CM_UART_DEV_0,receive,1024,5000);
+            u1_printf("%s",receive);
+            
+        }
+        Delay(500);
+    }
+}
+void u1_read(char *param)
+{
+    while (1)
+    {
+        // if (osSemaphoreAcquire(uart1_read_sem,osWaitForever) == osOK)
+        // {
+        //     char receive[1024] = {0};
+
+        //     cm_uart_read(CM_UART_DEV_1,receive,1024,5000);
+        //     u1_printf("%s",receive);
+            
+        // }
+        Delay(500);
+    }
 }
 
 void uart0_init(void)
