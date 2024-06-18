@@ -1,45 +1,56 @@
 #include "uart.h"
 #include <stdarg.h>
 #include <stdio.h>
-
+#include "nema.h"
+#include "string.h"
 
 osSemaphoreId_t uart0_read_sem = NULL;
 osSemaphoreId_t uart1_read_sem = NULL;
 
 uint8_t txBuff0[1024];
 uint8_t txBuff1[1024];
-void u0_printf(char* str, ...)
+void u0_printf(char *str, ...)
 {
     va_list args;
     int len;
 
     va_start(args, str);
-    len = vsnprintf((char*)txBuff0, 1024, str, args);
+    len = vsnprintf((char *)txBuff0, 1024, str, args);
     va_end(args);
     cm_uart_write(CM_UART_DEV_0, txBuff0, len, 5000);
 }
-void u1_printf(char* str, ...)
+void u1_printf(char *str, ...)
 {
     va_list args;
     int len;
 
     va_start(args, str);
-    len = vsnprintf((char*)txBuff1, 1024, str, args);
+    len = vsnprintf((char *)txBuff1, 1024, str, args);
     va_end(args);
     cm_uart_write(CM_UART_DEV_1, txBuff1, len, 5000);
 }
 
+char info1[100];
+char info2[100];
+char info3[100];
 void u0_read(char *param)
 {
     while (1)
     {
-        if (osSemaphoreAcquire(uart0_read_sem,osWaitForever) == osOK)
+        if (osSemaphoreAcquire(uart0_read_sem, osWaitForever) == osOK)
         {
             char receive[1024] = {0};
 
-            cm_uart_read(CM_UART_DEV_0,receive,1024,5000);
-            u1_printf("%s",receive);
-            
+            memset(receive,0,sizeof receive);
+            cm_uart_read(CM_UART_DEV_0, receive, 1024, 5000);
+
+            separateString(receive, "\r\n", (char *)info1, (char *)info2, (char *)info3);
+            // if (info1[0] == '$' && info1[1] == 'G' && info1[5] == 'A')
+            {
+                u1_printf("%s", info1);
+                u1_printf("%s", info2);
+                u1_printf("%s", info3);
+            }
         }
         Delay(500);
     }
@@ -54,7 +65,7 @@ void u1_read(char *param)
 
         //     cm_uart_read(CM_UART_DEV_1,receive,1024,5000);
         //     u1_printf("%s",receive);
-            
+
         // }
         Delay(500);
     }
