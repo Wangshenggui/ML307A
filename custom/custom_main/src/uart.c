@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "nema.h"
 #include "string.h"
+#include <mcu_uart.h>
 
 /*串口接收信号量*/
 osSemaphoreId_t uart0_read_sem = NULL;
@@ -44,9 +45,9 @@ void u0_read(char *param)
             memset(u0_receive, 0, sizeof u0_receive);
             cm_uart_read(CM_UART_DEV_0, u0_receive, 512, 5000);
             // 分离GGA消息
-            extractFirstGGA(u0_receive, GGAString, sizeof GGAString,"$GNGGA");
-            // 打印测试
-            u1_printf("--%s\n", GGAString);
+            extractFirstxxx(u0_receive, GGAString, sizeof GGAString, "$GNGGA");
+            // // 打印测试
+            // u1_printf("--%s\n", GGAString);
         }
         Delay(200);
     }
@@ -57,14 +58,22 @@ void u1_read(char *param)
 {
     while (1)
     {
-        // if (osSemaphoreAcquire(uart1_read_sem,osWaitForever) == osOK)
-        // {
-        //     char receive[1024] = {0};
+        if (osSemaphoreAcquire(uart1_read_sem, osWaitForever) == osOK)
+        {
+            // 接收前清空数据
+            memset(u1_receive, 0, sizeof u1_receive);
+            cm_uart_read(CM_UART_DEV_1, u1_receive, 512, 5000);
+            // 分离GGA消息
+            memset(CORSString, 0, sizeof CORSString);
+            extractFirstxxx(u1_receive, CORSString, sizeof CORSString, "$CORS");
 
-        //     cm_uart_read(CM_UART_DEV_1,receive,1024,5000);
-        //     u1_printf("%s",receive);
-
-        // }
+            u1_printf(">>>%s\n", u1_receive);
+            u1_printf(">>>%s\n", CORSString);
+            if (CORSString[0] == '$' && CORSString[1] == 'C' && CORSString[2] == 'O' && CORSString[3] == 'R' && CORSString[4] == 'S')
+            {
+                ParsingCORS(CORSString);
+            }
+        }
         Delay(500);
     }
 }

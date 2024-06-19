@@ -5,7 +5,7 @@ uint8_t GGAString[100];
 
 #define MAX_LINE_LENGTH 256
 
-int extractFirstGGA(const char *data, char *result, size_t result_size,char *gga_start)
+int extractFirstxxx(const char *data, char *result, size_t result_size,char *gga_start)
 {
     const char *ptr = data;
 

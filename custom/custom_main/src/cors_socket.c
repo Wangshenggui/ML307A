@@ -7,20 +7,15 @@
 #include "string.h"
 #include "uart.h"
 #include "sockets.h"
+#include <mcu_uart.h>
 
-//先默认
-char Corsipstr[20] = "sdk.pnt.10086.cn";
+//创建Cors嵌套字
 int Corssockfd;
+
 struct sockaddr_in Corsserv_addr;
-int CORSport = 8002;
 char ipstr[20];
 
-char part1[20];
-char part2[150];
-char part3[10];
-char part4[400];
 
-char CORScount[20] = "RTCM33_GRCEpro";
 
 uint8_t TCPrxBuf1[400];
 
@@ -62,10 +57,17 @@ void print_ipv4_address(const char* hostname)
     }
 }
 
+
+/*
+Corsipstr       ip
+CORSport        端口
+CORSMount       挂载点
+CORSAccPass     账号密码密文
+*/
 void CreateCorsSocket(void)
 {
     input:
-    print_ipv4_address(Corsipstr); // 获取动态IP
+    print_ipv4_address(CORS_Struct.Corsipstr); // 获取动态IP
     // 创建TCP套接字
     if ((Corssockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
@@ -80,7 +82,7 @@ void CreateCorsSocket(void)
     memset(&Corsserv_addr, 0, sizeof(Corsserv_addr));
     Corsserv_addr.sin_family = AF_INET;
     Corsserv_addr.sin_addr.s_addr = inet_addr(ipstr);
-    Corsserv_addr.sin_port = htons(CORSport);
+    Corsserv_addr.sin_port = htons(CORS_Struct.CORSport);
 
     // 尝试连接到服务器
     if (connect(Corssockfd, (struct sockaddr*)&Corsserv_addr, sizeof(Corsserv_addr)) < 0)
@@ -93,13 +95,11 @@ void CreateCorsSocket(void)
         u0_printf("connection Success\n");
     }
 
+    char temp_str[400];
     // 连接成功，可以在此发送和接收数据
-    sprintf((char*)part1, "%s", "GET /");
-    sprintf((char*)part2, "%s", " HTTP/1.0\r\nUser-Agent: NTRIP GNSSInternetRadio/1.4.10\r\nAccept: */*\r\nConnection: close\r\nAuthorization: Basic ");
-    sprintf((char*)part3, "%s", "\r\n\r\n");
-    sprintf((char*)part4, "%s%s%s%s%s", part1, CORScount, part2, "Y2VkcjIxNTEzOmZ5eDY5NzQ2", part3);
+    sprintf((char*)temp_str, "%s%s%s%s%s", "GET /", CORS_Struct.CORSMount, " HTTP/1.0\r\nUser-Agent: NTRIP GNSSInternetRadio/1.4.10\r\nAccept: */*\r\nConnection: close\r\nAuthorization: Basic ", CORS_Struct.AccPassCiphertext, "\r\n\r\n");
 
-    if (send(Corssockfd, part4, strlen((char*)part4), 0) < 0)
+    if (send(Corssockfd, temp_str, strlen((char*)temp_str), 0) < 0)
     {
         u0_printf("failed\r\n");
         goto input;

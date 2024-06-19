@@ -31,7 +31,7 @@ void GetCors(void)
         }
 
         //超时
-        if (timeout > 25)
+        if (timeout > 10)
         {
             //重启
             cm_pm_reboot();

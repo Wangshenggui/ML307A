@@ -65,4 +65,5 @@ out/build/custom/custom_main/src/cors_socket.o: \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\strings.h \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\sys\string.h \
  custom/custom_main/inc/uart.h include\cmiot/cm_uart.h \
- include\cmiot/cm_os.h include\cmiot/cm_iomux.h
+ include\cmiot/cm_os.h include\cmiot/cm_iomux.h \
+ custom/custom_main/inc/mcu_uart.h
