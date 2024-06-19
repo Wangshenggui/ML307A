@@ -10,6 +10,8 @@ f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/
                               out/build/third-party/cJSONFiles/cJSON/cJSON.o (__aeabi_d2iz)
 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_fixunsdfsi.o)
                               out/build/src/cm_lib/modem/cm_modem.o (__aeabi_d2uiz)
+f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_truncdfsf2.o)
+                              out/build/custom/custom_main/src/nema.o (__aeabi_d2f)
 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_aeabi_ldivmod.o)
                               out/build/third-party/aliyun/LinkSDK/core/utils/core_string.o (__aeabi_ldivmod)
 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_aeabi_uldivmod.o)
@@ -388,8 +390,6 @@ f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/
                               f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-dtoa.o) (__aeabi_uidiv)
 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_unorddf2.o)
                               f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libm.a(lib_a-w_pow.o) (__aeabi_dcmpun)
-f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_truncdfsf2.o)
-                              f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-strtod.o) (__aeabi_d2f)
 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_cmpsf2.o)
                               f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-strtod.o) (__aeabi_fcmple)
 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_unordsf2.o)
@@ -414,6 +414,7 @@ f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/
 Allocating common symbols
 Common symbol       size              file
 
+GPRMC_Struct        0x148             out/build/custom/custom_main/src/nema.o
 __lock___atexit_recursive_mutex
                     0x1               f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-lock.o)
 __lock___arc4random_mutex
@@ -3065,6 +3066,8 @@ Discarded input sections
  .text          0x00000000        0x0 out/build/custom/custom_main/src/nema.o
  .data          0x00000000        0x0 out/build/custom/custom_main/src/nema.o
  .bss           0x00000000        0x0 out/build/custom/custom_main/src/nema.o
+ .text.ParseGPRMC
+                0x00000000      0xa34 out/build/custom/custom_main/src/nema.o
  .text          0x00000000        0x0 out/build/custom/custom_main/src/mcu_uart.o
  .data          0x00000000        0x0 out/build/custom/custom_main/src/mcu_uart.o
  .bss           0x00000000        0x0 out/build/custom/custom_main/src/mcu_uart.o
@@ -3081,6 +3084,12 @@ Discarded input sections
  .bss           0x00000000        0x0 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_fixdfsi.o)
  .data          0x00000000        0x0 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_fixunsdfsi.o)
  .bss           0x00000000        0x0 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_fixunsdfsi.o)
+ .text          0x00000000       0xa0 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_truncdfsf2.o)
+ .data          0x00000000        0x0 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_truncdfsf2.o)
+ .bss           0x00000000        0x0 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_truncdfsf2.o)
+ .debug_frame   0x00000000       0x24 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_truncdfsf2.o)
+ .ARM.attributes
+                0x00000000       0x19 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_truncdfsf2.o)
  .text          0x00000000       0xa0 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_aeabi_ldivmod.o)
  .data          0x00000000        0x0 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_aeabi_ldivmod.o)
  .bss           0x00000000        0x0 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_aeabi_ldivmod.o)
@@ -7290,12 +7299,6 @@ Discarded input sections
  .bss           0x00000000        0x0 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_udivsi3.o)
  .data          0x00000000        0x0 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_unorddf2.o)
  .bss           0x00000000        0x0 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_unorddf2.o)
- .text          0x00000000       0xa0 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_truncdfsf2.o)
- .data          0x00000000        0x0 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_truncdfsf2.o)
- .bss           0x00000000        0x0 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_truncdfsf2.o)
- .debug_frame   0x00000000       0x24 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_truncdfsf2.o)
- .ARM.attributes
-                0x00000000       0x19 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_truncdfsf2.o)
  .text          0x00000000       0xec f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_cmpsf2.o)
  .data          0x00000000        0x0 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_cmpsf2.o)
  .bss           0x00000000        0x0 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_cmpsf2.o)
@@ -7464,7 +7467,7 @@ END GROUP
                 0x805f8050        0x4 LONG 0xfdd893e8 (__bss_lma_start - __flash_start)
                 0x805f8054        0x4 LONG 0x7e3813e8 __bss_lma_start
                 0x805f8058        0x4 LONG 0x7e3813e8 __bss_vma_start
-                0x805f805c        0x4 LONG 0x1564 (__bss_vma_end - __bss_vma_start)
+                0x805f805c        0x4 LONG 0x16ac (__bss_vma_end - __bss_vma_start)
                 0x805f8060        0x4 LONG 0x4
                 0x805f8064        0x4 LONG 0xa1a0 (__sramtext_lma_start - __flash_start)
                 0x805f8068        0x4 LONG 0x806021a0 __sramtext_lma_start
@@ -8242,7 +8245,7 @@ END GROUP
 .igot.plt       0x80603588        0x0
  .igot.plt      0x80603588        0x0 out/build/src/cm_lib/modem/cm_modem.o
 
-.bss            0x7e3813e8     0x1568
+.bss            0x7e3813e8     0x16b0
                 0x7e3813e8                __bss_vma_start = .
  *(.bss .bss.* COMMON .scommon .sbss .sbss.* .sbss2 .sbss2.* .gnu.linkonce.b.*)
  .bss.modem_mq  0x7e3813e8        0x4 out/build/src/cm_lib/modem/cm_modem.o
@@ -8271,79 +8274,80 @@ END GROUP
                 0x7e3824b8                TCPrxBuf1
                 0x7e382648                Corsipstr
                 0x7e38265c                Corssockfd
- COMMON         0x7e382660      0x108 out/build/custom/custom_main/src/nema.o
-                0x7e382660                GGAString
-                0x7e3826c8                GPGGA_Struct
- COMMON         0x7e382768      0x15c out/build/custom/custom_main/src/mcu_uart.o
-                0x7e382768                CORS_Struct
-                0x7e382860                CORSString
- COMMON         0x7e3828c4       0x28 out/build/custom/custom_main/src/baidumap.o
-                0x7e3828c4                BaiduMapsockfd
-                0x7e3828c8                Baiduipstr
-                0x7e3828dc                BaiduMapserv_addr
+ COMMON         0x7e382660      0x250 out/build/custom/custom_main/src/nema.o
+                0x7e382660                GPRMC_Struct
+                0x7e3827a8                GGAString
+                0x7e382810                GPGGA_Struct
+ COMMON         0x7e3828b0      0x15c out/build/custom/custom_main/src/mcu_uart.o
+                0x7e3828b0                CORS_Struct
+                0x7e3829a8                CORSString
+ COMMON         0x7e382a0c       0x28 out/build/custom/custom_main/src/baidumap.o
+                0x7e382a0c                BaiduMapsockfd
+                0x7e382a10                Baiduipstr
+                0x7e382a24                BaiduMapserv_addr
  .bss.__malloc_current_mallinfo
-                0x7e3828ec       0x28 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-mallocr.o)
-                0x7e3828ec                __malloc_current_mallinfo
+                0x7e382a34       0x28 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-mallocr.o)
+                0x7e382a34                __malloc_current_mallinfo
  .bss.__malloc_max_sbrked_mem
-                0x7e382914        0x4 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-mallocr.o)
-                0x7e382914                __malloc_max_sbrked_mem
+                0x7e382a5c        0x4 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-mallocr.o)
+                0x7e382a5c                __malloc_max_sbrked_mem
  .bss.__malloc_max_total_mem
-                0x7e382918        0x4 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-mallocr.o)
-                0x7e382918                __malloc_max_total_mem
+                0x7e382a60        0x4 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-mallocr.o)
+                0x7e382a60                __malloc_max_total_mem
  .bss.__malloc_top_pad
-                0x7e38291c        0x4 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-mallocr.o)
-                0x7e38291c                __malloc_top_pad
- COMMON         0x7e382920       0x21 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-lock.o)
-                0x7e382920                __lock___atexit_recursive_mutex
-                0x7e382924                __lock___arc4random_mutex
-                0x7e382928                __lock___env_recursive_mutex
-                0x7e38292c                __lock___sinit_recursive_mutex
-                0x7e382930                __lock___malloc_recursive_mutex
-                0x7e382934                __lock___at_quick_exit_mutex
-                0x7e382938                __lock___dd_hash_mutex
-                0x7e38293c                __lock___tz_mutex
-                0x7e382940                __lock___sfp_recursive_mutex
- *fill*         0x7e382941        0x3 
- COMMON         0x7e382944        0x4 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-reent.o)
-                0x7e382944                errno
+                0x7e382a64        0x4 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-mallocr.o)
+                0x7e382a64                __malloc_top_pad
+ COMMON         0x7e382a68       0x21 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-lock.o)
+                0x7e382a68                __lock___atexit_recursive_mutex
+                0x7e382a6c                __lock___arc4random_mutex
+                0x7e382a70                __lock___env_recursive_mutex
+                0x7e382a74                __lock___sinit_recursive_mutex
+                0x7e382a78                __lock___malloc_recursive_mutex
+                0x7e382a7c                __lock___at_quick_exit_mutex
+                0x7e382a80                __lock___dd_hash_mutex
+                0x7e382a84                __lock___tz_mutex
+                0x7e382a88                __lock___sfp_recursive_mutex
+ *fill*         0x7e382a89        0x3 
+ COMMON         0x7e382a8c        0x4 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-reent.o)
+                0x7e382a8c                errno
  .bss.heap_end.4194
-                0x7e382948        0x4 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libnosys.a(sbrk.o)
-                0x7e38294c                __bss_vma_end = .
-                0x7e382950                . = ALIGN (0x8)
- *fill*         0x7e38294c        0x4 
+                0x7e382a90        0x4 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libnosys.a(sbrk.o)
+                0x7e382a94                __bss_vma_end = .
+                0x7e382a98                . = ALIGN (0x8)
+ *fill*         0x7e382a94        0x4 
                 0x7e3813e8                __bss_lma_start = LOADADDR (.bss)
                 0x80603588                __flash_end = (LOADADDR (.data) + SIZEOF (.data))
-                0x7e382950                __ram_end = (ADDR (.bss) + SIZEOF (.bss))
-                0x7e382950                end = __ram_end
-                0x0007d6b0                __ram_reserve = ((ORIGIN (ram) + LENGTH (ram)) - __ram_end)
+                0x7e382a98                __ram_end = (ADDR (.bss) + SIZEOF (.bss))
+                0x7e382a98                end = __ram_end
+                0x0007d568                __ram_reserve = ((ORIGIN (ram) + LENGTH (ram)) - __ram_end)
                 0x000f4a78                __flash_reserve = ((ORIGIN (flash) + LENGTH (flash)) - __flash_end)
                 0x00000001                ASSERT ((__flash_end <= (ORIGIN (flash) + LENGTH (flash))), FLASH overflow)
                 0x00000001                ASSERT ((__ram_end <= (ORIGIN (ram) + LENGTH (ram))), RAM overflow)
 OUTPUT(out/images/ML307A/DSLN/ML307A_DSLN_APP.elf elf32-littlearm)
 
-.debug_info     0x00000000     0x83a8
+.debug_info     0x00000000     0x8b5b
  .debug_info    0x00000000     0x189e out/build/src/cm_lib/modem/cm_modem.o
  .debug_info    0x0000189e      0x29a out/build/custom/custom_main/src/custom_main.o
- .debug_info    0x00001b38     0x1378 out/build/custom/custom_main/src/uart.o
- .debug_info    0x00002eb0      0xd23 out/build/custom/custom_main/src/cors.o
- .debug_info    0x00003bd3     0x171f out/build/custom/custom_main/src/cors_socket.o
- .debug_info    0x000052f2      0xc69 out/build/custom/custom_main/src/nema.o
- .debug_info    0x00005f5b      0xc3d out/build/custom/custom_main/src/mcu_uart.o
- .debug_info    0x00006b98     0x17ea out/build/custom/custom_main/src/baidumap.o
- .debug_info    0x00008382       0x26 prebuild/objs/ML307A/DSLN/cm_stub_DSLN.o
+ .debug_info    0x00001b38     0x14d0 out/build/custom/custom_main/src/uart.o
+ .debug_info    0x00003008      0xe8b out/build/custom/custom_main/src/cors.o
+ .debug_info    0x00003e93     0x171f out/build/custom/custom_main/src/cors_socket.o
+ .debug_info    0x000055b2      0xeac out/build/custom/custom_main/src/nema.o
+ .debug_info    0x0000645e      0xd95 out/build/custom/custom_main/src/mcu_uart.o
+ .debug_info    0x000071f3     0x1942 out/build/custom/custom_main/src/baidumap.o
+ .debug_info    0x00008b35       0x26 prebuild/objs/ML307A/DSLN/cm_stub_DSLN.o
 
-.debug_abbrev   0x00000000     0x131c
+.debug_abbrev   0x00000000     0x13bc
  .debug_abbrev  0x00000000      0x2df out/build/src/cm_lib/modem/cm_modem.o
  .debug_abbrev  0x000002df      0x12c out/build/custom/custom_main/src/custom_main.o
- .debug_abbrev  0x0000040b      0x2a9 out/build/custom/custom_main/src/uart.o
- .debug_abbrev  0x000006b4      0x221 out/build/custom/custom_main/src/cors.o
- .debug_abbrev  0x000008d5      0x2bd out/build/custom/custom_main/src/cors_socket.o
- .debug_abbrev  0x00000b92      0x270 out/build/custom/custom_main/src/nema.o
- .debug_abbrev  0x00000e02      0x247 out/build/custom/custom_main/src/mcu_uart.o
- .debug_abbrev  0x00001049      0x2bf out/build/custom/custom_main/src/baidumap.o
- .debug_abbrev  0x00001308       0x14 prebuild/objs/ML307A/DSLN/cm_stub_DSLN.o
+ .debug_abbrev  0x0000040b      0x2c9 out/build/custom/custom_main/src/uart.o
+ .debug_abbrev  0x000006d4      0x241 out/build/custom/custom_main/src/cors.o
+ .debug_abbrev  0x00000915      0x2bd out/build/custom/custom_main/src/cors_socket.o
+ .debug_abbrev  0x00000bd2      0x290 out/build/custom/custom_main/src/nema.o
+ .debug_abbrev  0x00000e62      0x267 out/build/custom/custom_main/src/mcu_uart.o
+ .debug_abbrev  0x000010c9      0x2df out/build/custom/custom_main/src/baidumap.o
+ .debug_abbrev  0x000013a8       0x14 prebuild/objs/ML307A/DSLN/cm_stub_DSLN.o
 
-.debug_aranges  0x00000000      0x240
+.debug_aranges  0x00000000      0x248
  .debug_aranges
                 0x00000000       0xb8 out/build/src/cm_lib/modem/cm_modem.o
  .debug_aranges
@@ -8355,53 +8359,53 @@ OUTPUT(out/images/ML307A/DSLN/ML307A_DSLN_APP.elf elf32-littlearm)
  .debug_aranges
                 0x00000160       0x30 out/build/custom/custom_main/src/cors_socket.o
  .debug_aranges
-                0x00000190       0x30 out/build/custom/custom_main/src/nema.o
+                0x00000190       0x38 out/build/custom/custom_main/src/nema.o
  .debug_aranges
-                0x000001c0       0x28 out/build/custom/custom_main/src/mcu_uart.o
+                0x000001c8       0x28 out/build/custom/custom_main/src/mcu_uart.o
  .debug_aranges
-                0x000001e8       0x38 out/build/custom/custom_main/src/baidumap.o
+                0x000001f0       0x38 out/build/custom/custom_main/src/baidumap.o
  .debug_aranges
-                0x00000220       0x20 prebuild/objs/ML307A/DSLN/cm_stub_DSLN.o
+                0x00000228       0x20 prebuild/objs/ML307A/DSLN/cm_stub_DSLN.o
 
-.debug_ranges   0x00000000      0x1a0
+.debug_ranges   0x00000000      0x1a8
  .debug_ranges  0x00000000       0xa8 out/build/src/cm_lib/modem/cm_modem.o
  .debug_ranges  0x000000a8       0x20 out/build/custom/custom_main/src/custom_main.o
  .debug_ranges  0x000000c8       0x48 out/build/custom/custom_main/src/uart.o
  .debug_ranges  0x00000110       0x10 out/build/custom/custom_main/src/cors.o
  .debug_ranges  0x00000120       0x20 out/build/custom/custom_main/src/cors_socket.o
- .debug_ranges  0x00000140       0x20 out/build/custom/custom_main/src/nema.o
- .debug_ranges  0x00000160       0x18 out/build/custom/custom_main/src/mcu_uart.o
- .debug_ranges  0x00000178       0x28 out/build/custom/custom_main/src/baidumap.o
+ .debug_ranges  0x00000140       0x28 out/build/custom/custom_main/src/nema.o
+ .debug_ranges  0x00000168       0x18 out/build/custom/custom_main/src/mcu_uart.o
+ .debug_ranges  0x00000180       0x28 out/build/custom/custom_main/src/baidumap.o
 
-.debug_line     0x00000000     0x290a
+.debug_line     0x00000000     0x2b6f
  .debug_line    0x00000000      0xbff out/build/src/cm_lib/modem/cm_modem.o
  .debug_line    0x00000bff      0x1bc out/build/custom/custom_main/src/custom_main.o
  .debug_line    0x00000dbb      0x391 out/build/custom/custom_main/src/uart.o
  .debug_line    0x0000114c      0x333 out/build/custom/custom_main/src/cors.o
  .debug_line    0x0000147f      0x4a8 out/build/custom/custom_main/src/cors_socket.o
- .debug_line    0x00001927      0x42a out/build/custom/custom_main/src/nema.o
- .debug_line    0x00001d51      0x3fc out/build/custom/custom_main/src/mcu_uart.o
- .debug_line    0x0000214d      0x4e5 out/build/custom/custom_main/src/baidumap.o
- .debug_line    0x00002632      0x2d8 prebuild/objs/ML307A/DSLN/cm_stub_DSLN.o
+ .debug_line    0x00001927      0x693 out/build/custom/custom_main/src/nema.o
+ .debug_line    0x00001fba      0x3fc out/build/custom/custom_main/src/mcu_uart.o
+ .debug_line    0x000023b6      0x4e1 out/build/custom/custom_main/src/baidumap.o
+ .debug_line    0x00002897      0x2d8 prebuild/objs/ML307A/DSLN/cm_stub_DSLN.o
 
-.debug_str      0x00000000     0x2466
+.debug_str      0x00000000     0x2548
  .debug_str     0x00000000      0x967 out/build/src/cm_lib/modem/cm_modem.o
                                 0xacd (size before relaxing)
  .debug_str     0x00000967      0x1e5 out/build/custom/custom_main/src/custom_main.o
                                 0x396 (size before relaxing)
- .debug_str     0x00000b4c      0xfcd out/build/custom/custom_main/src/uart.o
-                               0x15b6 (size before relaxing)
- .debug_str     0x00001b19      0x20f out/build/custom/custom_main/src/cors.o
-                                0x893 (size before relaxing)
- .debug_str     0x00001d28      0x594 out/build/custom/custom_main/src/cors_socket.o
+ .debug_str     0x00000b4c     0x10a4 out/build/custom/custom_main/src/uart.o
+                               0x16a7 (size before relaxing)
+ .debug_str     0x00001bf0      0x20f out/build/custom/custom_main/src/cors.o
+                                0x984 (size before relaxing)
+ .debug_str     0x00001dff      0x594 out/build/custom/custom_main/src/cors_socket.o
                                 0xdeb (size before relaxing)
- .debug_str     0x000022bc       0x80 out/build/custom/custom_main/src/nema.o
-                                0x69f (size before relaxing)
- .debug_str     0x0000233c       0x38 out/build/custom/custom_main/src/mcu_uart.o
-                                0x719 (size before relaxing)
- .debug_str     0x00002374       0x95 out/build/custom/custom_main/src/baidumap.o
-                                0xe8b (size before relaxing)
- .debug_str     0x00002409       0x5d prebuild/objs/ML307A/DSLN/cm_stub_DSLN.o
+ .debug_str     0x00002393       0x8b out/build/custom/custom_main/src/nema.o
+                                0x79b (size before relaxing)
+ .debug_str     0x0000241e       0x38 out/build/custom/custom_main/src/mcu_uart.o
+                                0x80a (size before relaxing)
+ .debug_str     0x00002456       0x95 out/build/custom/custom_main/src/baidumap.o
+                                0xf7c (size before relaxing)
+ .debug_str     0x000024eb       0x5d prebuild/objs/ML307A/DSLN/cm_stub_DSLN.o
 
 .comment        0x00000000       0x76
  .comment       0x00000000       0x76 out/build/src/cm_lib/modem/cm_modem.o
@@ -8557,72 +8561,72 @@ OUTPUT(out/images/ML307A/DSLN/ML307A_DSLN_APP.elf elf32-littlearm)
  .ARM.attributes
                 0x00000a7f       0x29 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libnosys.a(_exit.o)
 
-.debug_frame    0x00000000     0x1924
+.debug_frame    0x00000000     0x1948
  .debug_frame   0x00000000      0x2b4 out/build/src/cm_lib/modem/cm_modem.o
  .debug_frame   0x000002b4       0x70 out/build/custom/custom_main/src/custom_main.o
  .debug_frame   0x00000324      0x138 out/build/custom/custom_main/src/uart.o
  .debug_frame   0x0000045c       0x30 out/build/custom/custom_main/src/cors.o
  .debug_frame   0x0000048c       0x74 out/build/custom/custom_main/src/cors_socket.o
- .debug_frame   0x00000500       0x74 out/build/custom/custom_main/src/nema.o
- .debug_frame   0x00000574       0x58 out/build/custom/custom_main/src/mcu_uart.o
- .debug_frame   0x000005cc       0x8c out/build/custom/custom_main/src/baidumap.o
- .debug_frame   0x00000658       0xac f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_addsubdf3.o)
- .debug_frame   0x00000704       0x50 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_muldivdf3.o)
- .debug_frame   0x00000754       0xc4 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_cmpdf2.o)
- .debug_frame   0x00000818       0x24 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_fixdfsi.o)
- .debug_frame   0x0000083c       0x24 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_fixunsdfsi.o)
- .debug_frame   0x00000860       0x2c f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_aeabi_uldivmod.o)
- .debug_frame   0x0000088c       0x38 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_udivmoddi4.o)
- .debug_frame   0x000008c4       0x20 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libm.a(lib_a-s_nan.o)
- .debug_frame   0x000008e4       0x20 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-atof.o)
- .debug_frame   0x00000904       0x30 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-atoi.o)
- .debug_frame   0x00000934       0x28 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-callocr.o)
- .debug_frame   0x0000095c       0x28 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-exit.o)
- .debug_frame   0x00000984       0x54 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-mallocr.o)
- .debug_frame   0x000009d8       0x38 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-memcmp.o)
- .debug_frame   0x00000a10       0x40 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-memmove.o)
- .debug_frame   0x00000a50       0x38 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-memset.o)
- .debug_frame   0x00000a88       0x30 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-mlock.o)
- .debug_frame   0x00000ab8       0x3c f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-rand.o)
- .debug_frame   0x00000af4       0x2c f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-sbrkr.o)
- .debug_frame   0x00000b20       0x7c f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-sprintf.o)
- .debug_frame   0x00000b9c       0x30 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-strchr.o)
- .debug_frame   0x00000bcc       0x34 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-strcmp.o)
- .debug_frame   0x00000c00       0x20 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-strcpy.o)
- .debug_frame   0x00000c20       0x20 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-strlen-stub.o)
- .debug_frame   0x00000c40       0x48 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-strncmp.o)
- .debug_frame   0x00000c88       0x38 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-strncpy.o)
- .debug_frame   0x00000cc0       0x88 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-strstr.o)
- .debug_frame   0x00000d48      0x108 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-strtod.o)
- .debug_frame   0x00000e50       0x20 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-strtok.o)
- .debug_frame   0x00000e70       0x50 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-strtok_r.o)
- .debug_frame   0x00000ec0       0x88 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-strtol.o)
- .debug_frame   0x00000f48       0x44 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-svfprintf.o)
- .debug_frame   0x00000f8c       0x58 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-vsnprintf.o)
- .debug_frame   0x00000fe4       0x5c f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-__call_atexit.o)
- .debug_frame   0x00001040       0x7c f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-dtoa.o)
- .debug_frame   0x000010bc       0x8c f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-freer.o)
- .debug_frame   0x00001148       0x6c f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-gdtoa-gethex.o)
- .debug_frame   0x000011b4       0x70 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-gdtoa-hexnan.o)
- .debug_frame   0x00001224       0x20 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-lnumeric.o)
- .debug_frame   0x00001244       0x54 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-locale.o)
- .debug_frame   0x00001298       0x40 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-localeconv.o)
- .debug_frame   0x000012d8       0xb0 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-lock.o)
- .debug_frame   0x00001388       0x48 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-mbtowc_r.o)
- .debug_frame   0x000013d0       0x34 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-memchr-stub.o)
- .debug_frame   0x00001404      0x268 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-mprec.o)
- .debug_frame   0x0000166c       0x60 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-reent.o)
- .debug_frame   0x000016cc       0x30 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-s_frexp.o)
- .debug_frame   0x000016fc       0x30 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-strnlen.o)
- .debug_frame   0x0000172c       0x78 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-svfiprintf.o)
- .debug_frame   0x000017a4       0x3c f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-wctomb_r.o)
- .debug_frame   0x000017e0       0x60 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-reallocr.o)
- .debug_frame   0x00001840       0x20 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_udivsi3.o)
- .debug_frame   0x00001860       0x20 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_unorddf2.o)
- .debug_frame   0x00001880       0x38 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_fixdfdi.o)
- .debug_frame   0x000018b8       0x2c f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_fixunsdfdi.o)
- .debug_frame   0x000018e4       0x20 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libnosys.a(sbrk.o)
- .debug_frame   0x00001904       0x20 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libnosys.a(_exit.o)
+ .debug_frame   0x00000500       0x98 out/build/custom/custom_main/src/nema.o
+ .debug_frame   0x00000598       0x58 out/build/custom/custom_main/src/mcu_uart.o
+ .debug_frame   0x000005f0       0x8c out/build/custom/custom_main/src/baidumap.o
+ .debug_frame   0x0000067c       0xac f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_addsubdf3.o)
+ .debug_frame   0x00000728       0x50 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_muldivdf3.o)
+ .debug_frame   0x00000778       0xc4 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_cmpdf2.o)
+ .debug_frame   0x0000083c       0x24 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_fixdfsi.o)
+ .debug_frame   0x00000860       0x24 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_fixunsdfsi.o)
+ .debug_frame   0x00000884       0x2c f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_aeabi_uldivmod.o)
+ .debug_frame   0x000008b0       0x38 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_udivmoddi4.o)
+ .debug_frame   0x000008e8       0x20 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libm.a(lib_a-s_nan.o)
+ .debug_frame   0x00000908       0x20 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-atof.o)
+ .debug_frame   0x00000928       0x30 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-atoi.o)
+ .debug_frame   0x00000958       0x28 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-callocr.o)
+ .debug_frame   0x00000980       0x28 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-exit.o)
+ .debug_frame   0x000009a8       0x54 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-mallocr.o)
+ .debug_frame   0x000009fc       0x38 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-memcmp.o)
+ .debug_frame   0x00000a34       0x40 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-memmove.o)
+ .debug_frame   0x00000a74       0x38 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-memset.o)
+ .debug_frame   0x00000aac       0x30 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-mlock.o)
+ .debug_frame   0x00000adc       0x3c f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-rand.o)
+ .debug_frame   0x00000b18       0x2c f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-sbrkr.o)
+ .debug_frame   0x00000b44       0x7c f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-sprintf.o)
+ .debug_frame   0x00000bc0       0x30 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-strchr.o)
+ .debug_frame   0x00000bf0       0x34 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-strcmp.o)
+ .debug_frame   0x00000c24       0x20 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-strcpy.o)
+ .debug_frame   0x00000c44       0x20 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-strlen-stub.o)
+ .debug_frame   0x00000c64       0x48 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-strncmp.o)
+ .debug_frame   0x00000cac       0x38 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-strncpy.o)
+ .debug_frame   0x00000ce4       0x88 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-strstr.o)
+ .debug_frame   0x00000d6c      0x108 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-strtod.o)
+ .debug_frame   0x00000e74       0x20 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-strtok.o)
+ .debug_frame   0x00000e94       0x50 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-strtok_r.o)
+ .debug_frame   0x00000ee4       0x88 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-strtol.o)
+ .debug_frame   0x00000f6c       0x44 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-svfprintf.o)
+ .debug_frame   0x00000fb0       0x58 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-vsnprintf.o)
+ .debug_frame   0x00001008       0x5c f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-__call_atexit.o)
+ .debug_frame   0x00001064       0x7c f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-dtoa.o)
+ .debug_frame   0x000010e0       0x8c f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-freer.o)
+ .debug_frame   0x0000116c       0x6c f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-gdtoa-gethex.o)
+ .debug_frame   0x000011d8       0x70 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-gdtoa-hexnan.o)
+ .debug_frame   0x00001248       0x20 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-lnumeric.o)
+ .debug_frame   0x00001268       0x54 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-locale.o)
+ .debug_frame   0x000012bc       0x40 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-localeconv.o)
+ .debug_frame   0x000012fc       0xb0 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-lock.o)
+ .debug_frame   0x000013ac       0x48 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-mbtowc_r.o)
+ .debug_frame   0x000013f4       0x34 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-memchr-stub.o)
+ .debug_frame   0x00001428      0x268 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-mprec.o)
+ .debug_frame   0x00001690       0x60 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-reent.o)
+ .debug_frame   0x000016f0       0x30 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-s_frexp.o)
+ .debug_frame   0x00001720       0x30 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-strnlen.o)
+ .debug_frame   0x00001750       0x78 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-svfiprintf.o)
+ .debug_frame   0x000017c8       0x3c f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-wctomb_r.o)
+ .debug_frame   0x00001804       0x60 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libc.a(lib_a-reallocr.o)
+ .debug_frame   0x00001864       0x20 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_udivsi3.o)
+ .debug_frame   0x00001884       0x20 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_arm_unorddf2.o)
+ .debug_frame   0x000018a4       0x38 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_fixdfdi.o)
+ .debug_frame   0x000018dc       0x2c f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7/nofp\libgcc.a(_fixunsdfdi.o)
+ .debug_frame   0x00001908       0x20 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libnosys.a(sbrk.o)
+ .debug_frame   0x00001928       0x20 f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libnosys.a(_exit.o)
 
 .stabstr        0x00000000       0xdf
  .stabstr       0x00000000       0xdf f:/2023-12-29desktop/github/ml307a/tools/toolchain/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7/nofp\libnosys.a(close.o)
