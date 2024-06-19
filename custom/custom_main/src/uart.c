@@ -4,9 +4,11 @@
 #include "nema.h"
 #include "string.h"
 
+/*串口接收信号量*/
 osSemaphoreId_t uart0_read_sem = NULL;
 osSemaphoreId_t uart1_read_sem = NULL;
 
+/*打印任意长度数据*/
 uint8_t txBuff0[1024];
 uint8_t txBuff1[1024];
 void u0_printf(char *str, ...)
@@ -30,31 +32,27 @@ void u1_printf(char *str, ...)
     cm_uart_write(CM_UART_DEV_1, txBuff1, len, 5000);
 }
 
-char info1[100];
-char info2[100];
-char info3[100];
+/*u0接收数据*/
+char u0_receive[512] = {0};
 void u0_read(char *param)
 {
     while (1)
     {
         if (osSemaphoreAcquire(uart0_read_sem, osWaitForever) == osOK)
         {
-            char receive[1024] = {0};
-
-            memset(receive,0,sizeof receive);
-            cm_uart_read(CM_UART_DEV_0, receive, 1024, 5000);
-
-            separateString(receive, "\r\n", (char *)info1, (char *)info2, (char *)info3);
-            // if (info1[0] == '$' && info1[1] == 'G' && info1[5] == 'A')
-            {
-                u1_printf("%s", info1);
-                u1_printf("%s", info2);
-                u1_printf("%s", info3);
-            }
+            // 接收前清空数据
+            memset(u0_receive, 0, sizeof u0_receive);
+            cm_uart_read(CM_UART_DEV_0, u0_receive, 512, 5000);
+            // 分离GGA消息
+            extractFirstGGA(u0_receive, GGAString, sizeof GGAString,"$GNGGA");
+            // 打印测试
+            u1_printf("--%s\n", GGAString);
         }
-        Delay(500);
+        Delay(200);
     }
 }
+/*u1接收数据*/
+char u1_receive[512] = {0};
 void u1_read(char *param)
 {
     while (1)
@@ -70,7 +68,7 @@ void u1_read(char *param)
         Delay(500);
     }
 }
-
+/*u0初始化*/
 void uart0_init(void)
 {
     uart0_read_sem = osSemaphoreNew(1, 0, NULL);
@@ -98,6 +96,7 @@ void uart0_init(void)
     /* 配置uart唤醒功能，使能边沿检测才具备唤醒功能，仅主串口具有唤醒功能，用于唤醒的数据并不能被uart接收，请在唤醒后再进行uart数传 */
     cm_iomux_set_pin_cmd(CM_IOMUX_PIN_17, CM_IOMUX_PINCMD1_LPMEDEG, CM_IOMUX_PINCMD1_FUNC1_LPM_EDGE_RISE);
 }
+/*u1初始化*/
 void uart1_init(void)
 {
     uart1_read_sem = osSemaphoreNew(1, 0, NULL);
@@ -122,7 +121,7 @@ void uart1_init(void)
 
     cm_uart_open(CM_UART_DEV_1, &config);
 }
-
+/*u0事件回调函数*/
 void u0_callback(void *param, uint32_t type)
 {
     if (CM_UART_EVENT_TYPE_RX_ARRIVED & type)
@@ -135,6 +134,7 @@ void u0_callback(void *param, uint32_t type)
         /* 接收FIFO缓存溢出 */
     }
 }
+/*u1事件回调函数*/
 void u1_callback(void *param, uint32_t type)
 {
     if (CM_UART_EVENT_TYPE_RX_ARRIVED & type)

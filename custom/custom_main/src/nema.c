@@ -1,48 +1,51 @@
 #include "nema.h"
 #include "string.h"
 
-
 uint8_t GGAString[100];
 
+#define MAX_LINE_LENGTH 256
 
-void separateString(char *inputString, const char *delimiter, char *info1, char *info2, char *info3)
+int extractFirstGGA(const char *data, char *result, size_t result_size,char *gga_start)
 {
-    char *token = strtok(inputString, delimiter);
+    const char *ptr = data;
 
-    // 使用 strncpy 将每个信息复制到相应的指针指向的缓冲区
-    if (token != NULL)
+    // 使用 strstr 查找字符串中第一个 "gga_start"
+    ptr = strstr(ptr, gga_start);
+    if (ptr != NULL)
     {
-        strncpy(info1, token, strlen(token));
-        info1[strlen(token)] = '\0';
-    }
-    else
-    {
-        info1[0] = '\0';
+        // 使用 strstr 查找 "\r\n" 作为行结束标志
+        const char *end = strstr(ptr, "\r\n");
+        if (end != NULL)
+        {
+            size_t length = end - ptr;
+            if (length < result_size)
+            {
+                strncpy(result, ptr, length);
+                result[length] = '\0'; // 确保字符串以 null 终止
+                return 1;              // 找到并成功复制
+            }
+            else
+            {
+                return -1; // 缓冲区太小
+            }
+        }
+        else
+        {
+            // 如果最后一行没有 "\r\n"
+            size_t length = strlen(ptr);
+            if (length < result_size)
+            {
+                strncpy(result, ptr, length);
+                result[length] = '\0';
+                return 1; // 找到并成功复制
+            }
+            else
+            {
+                return -1; // 缓冲区太小
+            }
+        }
     }
 
-    token = strtok(NULL, delimiter);
-
-    if (token != NULL)
-    {
-        strncpy(info2, token, strlen(token));
-        info2[strlen(token)] = '\0';
-    }
-    else
-    {
-        info2[0] = '\0';
-    }
-
-    token = strtok(NULL, delimiter);
-
-    if (token != NULL)
-    {
-        strncpy(info3, token, strlen(token));
-        info3[strlen(token)] = '\0';
-    }
-    else
-    {
-        info3[0] = '\0';
-    }
+    return 0; // 没有找到 "$GNGGA" 行
 }
-
 

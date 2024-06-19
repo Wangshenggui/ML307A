@@ -2,10 +2,11 @@
 #define _NEMA_H
 
 #include "custom_main.h"
+#include "stddef.h"
 
 extern uint8_t GGAString[100];
 
-void separateString(char *inputString, const char *delimiter, char *info1, char *info2, char *info3);
+int extractFirstGGA(const char *data, char *result, size_t result_size,char *gga_start);
 
 
 #endif

@@ -2,6 +2,12 @@
 #include "cm_modem.h"
 #include "uart.h"
 #include "cm_pm.h"
+#include "nema.h"
+#include <cors_socket.h>
+#include "sockets.h"
+
+
+uint8_t TCPrxBuf2[1200];
 
 
 /*获取差分数据任务*/
@@ -25,7 +31,7 @@ void GetCors(void)
         }
 
         //超时
-        if (timeout > 15)
+        if (timeout > 25)
         {
             //重启
             cm_pm_reboot();
@@ -35,45 +41,36 @@ void GetCors(void)
         u0_printf("Waiting for networking  %d\r\n", timeout);
         Delay(500);
     }
-    
-
+    //创建socket连接
     CreateCorsSocket();
 
-    // while (1)
-    // {
-    //     if (strlen((char*)GGAString) > 41)
-    //     {
-    //         sprintf((char*)GGAString1, "%s%c%c", (char*)GGAString, 0x0D, 0x0A);
-    //         if (send(Corssockfd, GGAString1, strlen((char*)GGAString1), 0) < 0)
-    //         {
-    //             u1_printf("send failed\r\n");
-    //             goto input;
-    //         }
-            
-    //         Delay(10);
-    //         if (recv(Corssockfd, TCPrxBuf2, sizeof(TCPrxBuf2), 0) < 0)
-    //         {
-    //             u1_printf("recive failed\r\n");
-    //             goto input;
-    //         }
-    //         cm_uart_write(CM_UART_DEV_0, TCPrxBuf2, sizeof(TCPrxBuf2), 1000);
-            
-    //         Delay(1000);
-    //         count2 = 0;
-    //     }
-    //     else
-    //     {
-    //         count2++;
-    //         if (count2 >= 15)
-    //         {
-    //             count2 = 0;
-    //             goto input;
-    //         }
 
-    //         Delay(200);
-    //         // goto input;
-    //     }
-    // }
+    uint8_t GGAString1[200];
+    while (1)
+    {
+        if (strlen((char*)GGAString) > 41)
+        {
+            sprintf((char*)GGAString1, "%s%c%c", (char*)GGAString, 0x0D, 0x0A);
+            if (send(Corssockfd, GGAString1, strlen((char*)GGAString1), 0) < 0)
+            {
+                u1_printf("send failed\r\n");
+            }
+            
+            Delay(10);
+            if (recv(Corssockfd, TCPrxBuf2, sizeof(TCPrxBuf2), 0) < 0)
+            {
+                u1_printf("recive failed\r\n");
+            }
+            cm_uart_write(CM_UART_DEV_0, TCPrxBuf2, sizeof(TCPrxBuf2), 1000);
+            
+            Delay(1000);
+        }
+    }
+
+    while(1)
+    {
+        Delay(500);
+    }
 }
 
 

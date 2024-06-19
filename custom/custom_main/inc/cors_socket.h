@@ -3,7 +3,7 @@
 
 #include "custom_main.h"
 
-
+extern int Corssockfd;
 
 void CreateCorsSocket();
 
