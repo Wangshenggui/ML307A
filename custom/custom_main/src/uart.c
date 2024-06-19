@@ -46,6 +46,8 @@ void u0_read(char *param)
             cm_uart_read(CM_UART_DEV_0, u0_receive, 512, 5000);
             // 分离GGA消息
             extractFirstxxx(u0_receive, (char*)GGAString, sizeof GGAString, "$GNGGA");
+            // 分离RMC消息
+            extractFirstxxx(u0_receive, (char*)RMCString, sizeof RMCString, "$GNRMC");
             // // 打印测试
             // u1_printf("--%s\n", GGAString);
         }
@@ -63,7 +65,7 @@ void u1_read(char *param)
             // 接收前清空数据
             memset(u1_receive, 0, sizeof u1_receive);
             cm_uart_read(CM_UART_DEV_1, u1_receive, 512, 5000);
-            // 分离GGA消息
+            // 分离CORS消息
             memset(CORSString, 0, sizeof CORSString);
             extractFirstxxx(u1_receive, (char*)CORSString, sizeof CORSString, "$CORS");
 

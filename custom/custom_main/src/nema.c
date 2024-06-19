@@ -4,6 +4,7 @@
 #include "stdio.h"
 
 uint8_t GGAString[100];
+uint8_t RMCString[100];
 
 GPGGA_Structure GPGGA_Struct;
 GPRMC_Structure GPRMC_Struct;

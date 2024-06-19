@@ -5,6 +5,7 @@
 #include "stddef.h"
 
 extern uint8_t GGAString[100];
+extern uint8_t RMCString[100];
 
 typedef struct
 {
