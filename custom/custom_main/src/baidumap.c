@@ -103,12 +103,9 @@ input:
         ParseGPGGA((char *)GGAString, 7);
         ParseGPGGA((char *)GGAString, 9);
 
-        u1_printf(">>>>>>>>%s\r\n", GGAString);
-        u1_printf(">>>>>>>>%s\r\n", RMCString);
-        // u1_printf("%0.10f--%0.10f\r\n", GPGGA_Struct.Latitude, GPGGA_Struct.Longitude);
-        // u1_printf("%d\r\n", GPGGA_Struct.PositioningMode);
-        // u1_printf("%d\r\n", GPGGA_Struct.sats);
-        // u1_printf("%f\r\n", GPGGA_Struct.Height);
+        ParseGPRMC((char*)RMCString, 7);
+        
+
 
         if (1)
         {
