@@ -40,4 +40,8 @@ out/build/custom/custom_main/src/mcu_uart.o: \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\sys\_locale.h \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\strings.h \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\sys\string.h \
- custom/custom_main/inc/cors_socket.h custom/custom_main/inc/uart.h
+ custom/custom_main/inc/cors_socket.h custom/custom_main/inc/uart.h \
+ include\cmiot/cm_pm.h \
+ f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\stdlib.h \
+ f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\machine\stdlib.h \
+ f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\alloca.h

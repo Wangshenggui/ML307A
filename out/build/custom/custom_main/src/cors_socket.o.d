@@ -9,17 +9,18 @@ out/build/custom/custom_main/src/cors_socket.o: \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\_newlib_version.h \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\sys\_intsup.h \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\sys\_stdint.h \
+ include\cmiot/cm_os.h \
+ f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\lib\gcc\arm-none-eabi\8.3.1\include\stddef.h \
  include\platform\lwip\lwip/sockets.h include\platform\lwip\lwip/opt.h \
  include\platform\lwip\arch/lwipopts.h include\platform\lwip\arch/cc.h \
  include\platform\lwip\arch/lwipopts_crane.h \
  include\platform\lwip\lwip/debug.h include\platform\lwip\lwip/arch.h \
- include\platform\lwip\arch/cc.h \
- f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\lib\gcc\arm-none-eabi\8.3.1\include\stddef.h \
- include\platform\lwip\lwip/ip_addr.h include\platform\lwip\lwip/def.h \
- include\platform\lwip\ipv4/ip4_addr.h include\platform\lwip\lwip/opt.h \
- include\platform\lwip\lwip/def.h include\platform\lwip\ipv6/ip6_addr.h \
- include\platform\lwip\ipv4/inet.h include\platform\lwip\lwip/ip_addr.h \
- include\platform\lwip\ipv6/inet6.h include\platform\lwip\ipv6/ip6_addr.h \
+ include\platform\lwip\arch/cc.h include\platform\lwip\lwip/ip_addr.h \
+ include\platform\lwip\lwip/def.h include\platform\lwip\ipv4/ip4_addr.h \
+ include\platform\lwip\lwip/opt.h include\platform\lwip\lwip/def.h \
+ include\platform\lwip\ipv6/ip6_addr.h include\platform\lwip\ipv4/inet.h \
+ include\platform\lwip\lwip/ip_addr.h include\platform\lwip\ipv6/inet6.h \
+ include\platform\lwip\ipv6/ip6_addr.h \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\stdlib.h \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\machine\ieeefp.h \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\_ansi.h \
@@ -65,5 +66,4 @@ out/build/custom/custom_main/src/cors_socket.o: \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\strings.h \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\sys\string.h \
  custom/custom_main/inc/uart.h include\cmiot/cm_uart.h \
- include\cmiot/cm_os.h include\cmiot/cm_iomux.h \
- custom/custom_main/inc/mcu_uart.h
+ include\cmiot/cm_iomux.h custom/custom_main/inc/mcu_uart.h

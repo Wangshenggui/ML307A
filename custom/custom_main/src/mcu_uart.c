@@ -5,6 +5,8 @@
 #include "string.h"
 #include <cors_socket.h>
 #include "uart.h"
+#include "cm_pm.h"
+#include "stdlib.h"
 
 uint8_t CORSString[100];
 

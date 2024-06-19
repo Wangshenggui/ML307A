@@ -5,6 +5,9 @@
 #include "nema.h"
 #include <cors_socket.h>
 #include "sockets.h"
+#include "string.h"
+#include "stdio.h"
+#include "baidumap.h"
 
 
 uint8_t TCPrxBuf2[1200];
@@ -43,7 +46,6 @@ void GetCors(void)
     }
     //创建socket连接
     CreateCorsSocket();
-
 
     uint8_t GGAString1[200];
     while (1)

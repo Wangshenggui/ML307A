@@ -7,6 +7,7 @@ out/build/custom/custom_main/src/nema.o: custom/custom_main/src/nema.c \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\_newlib_version.h \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\sys\_intsup.h \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\sys\_stdint.h \
+ include\cmiot/cm_os.h \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\lib\gcc\arm-none-eabi\8.3.1\include\stddef.h \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\string.h \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\_ansi.h \

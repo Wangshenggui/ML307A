@@ -11,9 +11,8 @@
 
 //创建Cors嵌套字
 int Corssockfd;
-
 struct sockaddr_in Corsserv_addr;
-char ipstr[20];
+char Corsipstr[20];
 
 
 
@@ -22,7 +21,7 @@ uint8_t TCPrxBuf1[400];
 int count1 = 0;
 
 
-void print_ipv4_address(const char* hostname)
+void print_ipv4_addressCors(const char* hostname)
 {
     struct addrinfo hints, * res, * p;
     int status;
@@ -46,7 +45,7 @@ void print_ipv4_address(const char* hostname)
         for (p = res; p != NULL; p = p->ai_next)
         {
             struct sockaddr_in* ipv4 = (struct sockaddr_in*)p->ai_addr;
-            if (inet_ntop(AF_INET, &ipv4->sin_addr, (void*)ipstr, sizeof ipstr) != NULL)
+            if (inet_ntop(AF_INET, &ipv4->sin_addr, (void*)Corsipstr, sizeof Corsipstr) != NULL)
             {
                 found = 0;
                 break; // 找到后退出循环
@@ -67,7 +66,7 @@ CORSAccPass     账号密码密文
 void CreateCorsSocket(void)
 {
     input:
-    print_ipv4_address(CORS_Struct.Corsipstr); // 获取动态IP
+    print_ipv4_addressCors(CORS_Struct.Corsipstr); // 获取动态IP
     // 创建TCP套接字
     if ((Corssockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
@@ -81,7 +80,7 @@ void CreateCorsSocket(void)
     // 初始化服务器地址结构
     memset(&Corsserv_addr, 0, sizeof(Corsserv_addr));
     Corsserv_addr.sin_family = AF_INET;
-    Corsserv_addr.sin_addr.s_addr = inet_addr(ipstr);
+    Corsserv_addr.sin_addr.s_addr = inet_addr(Corsipstr);
     Corsserv_addr.sin_port = htons(CORS_Struct.CORSport);
 
     // 尝试连接到服务器

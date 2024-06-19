@@ -45,7 +45,7 @@ void u0_read(char *param)
             memset(u0_receive, 0, sizeof u0_receive);
             cm_uart_read(CM_UART_DEV_0, u0_receive, 512, 5000);
             // 分离GGA消息
-            extractFirstxxx(u0_receive, GGAString, sizeof GGAString, "$GNGGA");
+            extractFirstxxx(u0_receive, (char*)GGAString, sizeof GGAString, "$GNGGA");
             // // 打印测试
             // u1_printf("--%s\n", GGAString);
         }
@@ -65,13 +65,13 @@ void u1_read(char *param)
             cm_uart_read(CM_UART_DEV_1, u1_receive, 512, 5000);
             // 分离GGA消息
             memset(CORSString, 0, sizeof CORSString);
-            extractFirstxxx(u1_receive, CORSString, sizeof CORSString, "$CORS");
+            extractFirstxxx(u1_receive, (char*)CORSString, sizeof CORSString, "$CORS");
 
             u1_printf(">>>%s\n", u1_receive);
             u1_printf(">>>%s\n", CORSString);
             if (CORSString[0] == '$' && CORSString[1] == 'C' && CORSString[2] == 'O' && CORSString[3] == 'R' && CORSString[4] == 'S')
             {
-                ParsingCORS(CORSString);
+                ParsingCORS((char*)CORSString);
             }
         }
         Delay(500);

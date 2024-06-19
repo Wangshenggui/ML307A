@@ -5,6 +5,7 @@
 
 extern int Corssockfd;
 
+void print_ipv4_addressCors(const char* hostname);
 void CreateCorsSocket();
 
 
