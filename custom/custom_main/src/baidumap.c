@@ -10,11 +10,24 @@
 #include "stdlib.h"
 #include "cors_socket.h"
 #include "netdb.h"
+#include "coor_trans.h"
 
 // 创建BaiduMap嵌套字
 int BaiduMapsockfd;
 struct sockaddr_in BaiduMapserv_addr;
 char Baiduipstr[20];
+
+char strx1[200];
+char strx2[200];
+
+double wgs84_lon = 0;
+double wgs84_lat = 0;
+
+double gcj02_lon = 0;
+double gcj02_lat = 0;
+
+double bd09_lon = 0;
+double bd09_lat = 0;
 
 void UpBaiduMap(void)
 {
@@ -91,9 +104,6 @@ input:
         goto input;
     }
 
-    char strx1[200];
-    char strx2[200];
-
     // 连接成功，可以在此发送和接收数据
     while (1)
     {
@@ -103,9 +113,18 @@ input:
         ParseGPGGA((char *)GGAString, 7);
         ParseGPGGA((char *)GGAString, 9);
 
-        ParseGPRMC((char*)RMCString, 7);
-        
+        ParseGPRMC((char *)RMCString, 7);
 
+        wgs84_lon = dms_to_degrees(GPGGA_Struct.Longitude);
+        wgs84_lat = dms_to_degrees(GPGGA_Struct.Latitude);
+
+        gcj02_lon = wgs84togcj02(wgs84_lon, wgs84_lat).longitude;
+        gcj02_lat = wgs84togcj02(wgs84_lon, wgs84_lat).latitude;
+
+        bd09_lon = gcj02tobd09(gcj02_lon, gcj02_lat).longitude;
+        bd09_lat = gcj02tobd09(gcj02_lon, gcj02_lat).latitude;
+
+        u1_printf("%f----%f\r\n",bd09_lon,bd09_lat);
 
         if (1)
         {

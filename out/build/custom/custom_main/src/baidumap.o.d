@@ -70,4 +70,5 @@ out/build/custom/custom_main/src/baidumap.o: \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\lib\gcc\arm-none-eabi\8.3.1\include-fixed\syslimits.h \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\limits.h \
  f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\sys\syslimits.h \
- include\platform\lwip\lwip/netbuf.h
+ include\platform\lwip\lwip/netbuf.h custom/custom_main/inc/coor_trans.h \
+ f:\2023-12-29desktop\github\ml307a\tools\toolchain\gcc-arm-none-eabi\arm-none-eabi\include\math.h
