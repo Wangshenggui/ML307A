@@ -22,7 +22,18 @@ typedef struct
 } CORS_Structure;
 extern CORS_Structure CORS_Struct;
 
+typedef struct
+{
+    char str[100];                      //�洢�ָ���ַ���
+
+    unsigned int Slave_State[8];
+    unsigned int ReadSpeed1[8];
+    unsigned int ReadSpeed2[8];
+}SLAVE_Structure;
+extern SLAVE_Structure SLAVE_Struct;
+
 void ParsingCORS(const char *string);
 void ParseCORS(const char *string, int n);
+void ParseSLAVE(const char *string, int n);
 
 #endif

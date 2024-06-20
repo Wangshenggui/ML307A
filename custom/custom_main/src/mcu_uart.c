@@ -12,6 +12,24 @@ uint8_t CORSString[100];
 uint8_t SLAVEString[100];
 
 CORS_Structure CORS_Struct;
+SLAVE_Structure SLAVE_Struct;
+
+// 裁剪字符串
+static char *substring(char *dst, char *src, int start, int len)
+{
+    int length = 1000; // ×î´ó³¤¶È
+    if (start >= length || start < 0)
+        return NULL;
+    if (len > length)
+        len = length - start;
+    src += start;
+    while (len--)
+    {
+        *(dst++) = *(src++);
+    }
+    *(dst++) = '\0';
+    return dst;
+}
 
 void ParsingCORS(const char *string)
 {
@@ -69,10 +87,10 @@ void ParsingCORS(const char *string)
 
     ParseCORS((char *)string, 4);
 
-    u1_printf("%s\r\n",CORS_Struct.Corsipstr);
-    u1_printf("%d\r\n",CORS_Struct.CORSport);
-    u1_printf("%s\r\n",CORS_Struct.CORSMount);
-    u1_printf("%s\r\n",CORS_Struct.AccPassCiphertext);
+    u1_printf("%s\r\n", CORS_Struct.Corsipstr);
+    u1_printf("%d\r\n", CORS_Struct.CORSport);
+    u1_printf("%s\r\n", CORS_Struct.CORSMount);
+    u1_printf("%s\r\n", CORS_Struct.AccPassCiphertext);
 }
 
 void ParseCORS(const char *string, int n)
@@ -154,5 +172,62 @@ void ParseCORS(const char *string, int n)
             // u0_printf("@%s\n",CORS_Struct.accpass);
             break;
         }
+    }
+}
+
+void ParseSLAVE(const char *string, int n)
+{
+    char result[200];
+    unsigned char max_length = 200;
+    const char *start = string;
+
+    int i = 0;
+    // 定位到第n个逗号
+    for (i = 0; i < n; i++)
+    {
+        start = strchr(start, ',');
+        if (!start)
+        {
+            // 如果逗号不够n个，将结果设为空字符串
+            result[0] = '\0';
+            return;
+        }
+
+        // 移动到下一个字符
+        start++;
+    }
+
+    // 计算逗号后字符串的长度
+    const char *end = strchr(start, ',');
+    size_t length = end ? (size_t)(end - start) : strlen(start);
+
+    // 截取字符串并复制到结果
+    if (length < max_length - 1)
+    {
+        strncpy(result, start, length);
+        // 手动添加 null 结尾
+        result[length] = '\0';
+    }
+    else
+    {
+        // 目标长度不足，截断字符串
+        strncpy(result, start, max_length - 1);
+        result[max_length - 1] = '\0';
+    }
+
+    if (n >= 1 && n <= 8)
+    {
+        substring(SLAVE_Struct.str, result, 0, strlen(result));
+        SLAVE_Struct.Slave_State[n - 1] = atoi(SLAVE_Struct.str);
+    }
+    else if (n >= 9 && n <= 16)
+    {
+        substring(SLAVE_Struct.str, result, 0, strlen(result));
+        SLAVE_Struct.ReadSpeed1[n - 8 - 1] = atoi(SLAVE_Struct.str);
+    }
+    else if (n >= 17 && n <= 24)
+    {
+        substring(SLAVE_Struct.str, result, 0, strlen(result));
+        SLAVE_Struct.ReadSpeed2[n - 16 - 1] = atoi(SLAVE_Struct.str);
     }
 }

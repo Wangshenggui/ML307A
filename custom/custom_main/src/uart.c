@@ -45,9 +45,9 @@ void u0_read(char *param)
             memset(u0_receive, 0, sizeof u0_receive);
             cm_uart_read(CM_UART_DEV_0, u0_receive, 512, 5000);
             // 分离GGA消息
-            extractFirstxxx(u0_receive, (char*)GGAString, sizeof GGAString, "$GNGGA");
+            extractFirstxxx(u0_receive, (char *)GGAString, sizeof GGAString, "$GNGGA");
             // 分离RMC消息
-            extractFirstxxx(u0_receive, (char*)RMCString, sizeof RMCString, "$GNRMC");
+            extractFirstxxx(u0_receive, (char *)RMCString, sizeof RMCString, "$GNRMC");
             // // 打印测试
             // u1_printf("--%s\n", GGAString);
         }
@@ -67,19 +67,28 @@ void u1_read(char *param)
             cm_uart_read(CM_UART_DEV_1, u1_receive, 512, 5000);
             // 分离CORS消息
             memset(CORSString, 0, sizeof CORSString);
-            extractFirstxxx(u1_receive, (char*)CORSString, sizeof CORSString, "$CORS");
-            extractFirstxxx(u1_receive, (char*)SLAVEString, sizeof SLAVEString, "$SLAVE");
+            extractFirstxxx(u1_receive, (char *)CORSString, sizeof CORSString, "$CORS");
+            extractFirstxxx(u1_receive, (char *)SLAVEString, sizeof SLAVEString, "$SLAVE");
 
             u1_printf("u1_receive>>>%s\n", u1_receive);
-            
+
             if (CORSString[0] == '$' && CORSString[1] == 'C' && CORSString[2] == 'O' && CORSString[3] == 'R' && CORSString[4] == 'S')
             {
                 u1_printf("CORSString>>>%s\n", CORSString);
-                ParsingCORS((char*)CORSString);
+                ParsingCORS((char *)CORSString);
             }
             else if (SLAVEString[0] == '$' && SLAVEString[1] == 'S' && SLAVEString[2] == 'L' && SLAVEString[3] == 'A' && SLAVEString[4] == 'V' && SLAVEString[5] == 'E')
             {
                 u1_printf("SLAVEString>>>%s\n", SLAVEString);
+                for (int i = 1; i < 24; i++)
+                {
+                    ParseSLAVE("$SLAVE,1,0,2,0,1,0,0,45,0,0,65,0,0,56,0,0,0,0,0,0,75,0,22,0", i);
+                }
+                for (int i = 0; i < 8; i++)
+                {
+                    u1_printf("%d,%d,%d\r\n\r\n",
+                              SLAVE_Struct.Slave_State[i], SLAVE_Struct.ReadSpeed1[i], SLAVE_Struct.ReadSpeed2[i]);
+                }
             }
         }
         Delay(500);
