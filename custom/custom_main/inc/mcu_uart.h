@@ -7,6 +7,7 @@
 #include "custom_main.h"
 
 extern uint8_t CORSString[100];
+extern uint8_t SLAVEString[100];
 
 typedef struct
 {

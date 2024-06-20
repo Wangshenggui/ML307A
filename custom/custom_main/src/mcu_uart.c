@@ -9,6 +9,7 @@
 #include "stdlib.h"
 
 uint8_t CORSString[100];
+uint8_t SLAVEString[100];
 
 CORS_Structure CORS_Struct;
 

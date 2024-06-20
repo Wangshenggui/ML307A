@@ -68,12 +68,18 @@ void u1_read(char *param)
             // 分离CORS消息
             memset(CORSString, 0, sizeof CORSString);
             extractFirstxxx(u1_receive, (char*)CORSString, sizeof CORSString, "$CORS");
+            extractFirstxxx(u1_receive, (char*)SLAVEString, sizeof SLAVEString, "$SLAVE");
 
-            u1_printf(">>>%s\n", u1_receive);
-            u1_printf(">>>%s\n", CORSString);
+            u1_printf("u1_receive>>>%s\n", u1_receive);
+            
             if (CORSString[0] == '$' && CORSString[1] == 'C' && CORSString[2] == 'O' && CORSString[3] == 'R' && CORSString[4] == 'S')
             {
+                u1_printf("CORSString>>>%s\n", CORSString);
                 ParsingCORS((char*)CORSString);
+            }
+            else if (SLAVEString[0] == '$' && SLAVEString[1] == 'S' && SLAVEString[2] == 'L' && SLAVEString[3] == 'A' && SLAVEString[4] == 'V' && SLAVEString[5] == 'E')
+            {
+                u1_printf("SLAVEString>>>%s\n", SLAVEString);
             }
         }
         Delay(500);
