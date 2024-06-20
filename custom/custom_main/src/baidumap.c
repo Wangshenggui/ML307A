@@ -155,18 +155,18 @@ input:
 \"r7\":%d,\
 \"r8\":%d\
 }",
-                    1,
-                    1,
-                    0,
-                    1,
-                    12,
-                    23,
-                    34,
-                    45,
-                    56,
-                    67,
-                    78,
-                    rand() % 100);
+                    SLAVE_Struct.Slave_State[0],
+                    SLAVE_Struct.Slave_State[1],
+                    SLAVE_Struct.Slave_State[2],
+                    SLAVE_Struct.Slave_State[3],
+                    SLAVE_Struct.ReadSpeed1[0],
+                    SLAVE_Struct.ReadSpeed1[1],
+                    SLAVE_Struct.ReadSpeed1[2],
+                    SLAVE_Struct.ReadSpeed1[3],
+                    SLAVE_Struct.ReadSpeed2[0],
+                    SLAVE_Struct.ReadSpeed2[1],
+                    SLAVE_Struct.ReadSpeed2[2],
+                    SLAVE_Struct.ReadSpeed2[3]);
 
             if (send(BaiduMapsockfd, strx1, strlen((char *)strx1), 0) < 0)
             {

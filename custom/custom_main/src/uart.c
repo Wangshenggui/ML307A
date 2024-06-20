@@ -82,12 +82,7 @@ void u1_read(char *param)
                 u1_printf("SLAVEString>>>%s\n", SLAVEString);
                 for (int i = 1; i < 24; i++)
                 {
-                    ParseSLAVE("$SLAVE,1,0,2,0,1,0,0,45,0,0,65,0,0,56,0,0,0,0,0,0,75,0,22,0", i);
-                }
-                for (int i = 0; i < 8; i++)
-                {
-                    u1_printf("%d,%d,%d\r\n\r\n",
-                              SLAVE_Struct.Slave_State[i], SLAVE_Struct.ReadSpeed1[i], SLAVE_Struct.ReadSpeed2[i]);
+                    ParseSLAVE(SLAVEString, i);
                 }
             }
         }
