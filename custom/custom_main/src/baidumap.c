@@ -118,30 +118,28 @@ input:
         wgs84_lon = dms_to_degrees(GPGGA_Struct.Longitude);
         wgs84_lat = dms_to_degrees(GPGGA_Struct.Latitude);
 
-        gcj02_lon = wgs84togcj02(wgs84_lon, wgs84_lat).longitude;
-        gcj02_lat = wgs84togcj02(wgs84_lon, wgs84_lat).latitude;
+        // gcj02_lon = wgs84togcj02(wgs84_lon, wgs84_lat).longitude;
+        // gcj02_lat = wgs84togcj02(wgs84_lon, wgs84_lat).latitude;
 
-        bd09_lon = gcj02tobd09(gcj02_lon, gcj02_lat).longitude;
-        bd09_lat = gcj02tobd09(gcj02_lon, gcj02_lat).latitude;
-
-        u1_printf("%f----%f\r\n",bd09_lon,bd09_lat);
+        // bd09_lon = gcj02tobd09(gcj02_lon, gcj02_lat).longitude;
+        // bd09_lat = gcj02tobd09(gcj02_lon, gcj02_lat).latitude;
 
         if (1)
         {
             sprintf(strx1, "\
-{\"lng\":%0.7f,\
-\"lat\":%0.7f,\
-\"rtkstate\":%d,\
+{\"lon\":%0.10lf,\
+\"lat\":%0.10lf,\
+\"rtksta\":%d,\
 \"speed\":%f,\
-\"rtknum\":%d,\
-\"altitude\":%0.2f\
+\"HCSDS\":%d,\
+\"alti\":%0.2f\
 }",
-                    1.23,
-                    4.56,
-                    2,
-                    5.67,
-                    1,
-                    2.58);
+                    wgs84_lon,
+                    wgs84_lat,
+                    GPGGA_Struct.PositioningMode,
+                    GPRMC_Struct.Speed,
+                    GPGGA_Struct.sats,
+                    GPGGA_Struct.Height);
 
             sprintf(strx2, "\
 {\"S1\":%d,\
