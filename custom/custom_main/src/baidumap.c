@@ -20,6 +20,8 @@ char Baiduipstr[20];
 char strx1[200];
 char strx2[200];
 
+uint8_t TCPrxBuf3[400];
+
 double wgs84_lon = 0;
 double wgs84_lat = 0;
 
@@ -124,9 +126,7 @@ input:
         // bd09_lon = gcj02tobd09(gcj02_lon, gcj02_lat).longitude;
         // bd09_lat = gcj02tobd09(gcj02_lon, gcj02_lat).latitude;
 
-        if (1)
-        {
-            sprintf(strx1, "\
+        sprintf(strx1, "\
 {\"lon\":%0.10lf,\
 \"lat\":%0.10lf,\
 \"rtksta\":%d,\
@@ -134,14 +134,14 @@ input:
 \"HCSDS\":%d,\
 \"alti\":%0.2f\
 }",
-                    wgs84_lon,
-                    wgs84_lat,
-                    GPGGA_Struct.PositioningMode,
-                    GPRMC_Struct.Speed,
-                    GPGGA_Struct.sats,
-                    GPGGA_Struct.Height);
+                wgs84_lon,
+                wgs84_lat,
+                GPGGA_Struct.PositioningMode,
+                GPRMC_Struct.Speed,
+                GPGGA_Struct.sats,
+                GPGGA_Struct.Height);
 
-            sprintf(strx2, "\
+        sprintf(strx2, "\
 {\"S1\":%d,\
 \"S2\":%d,\
 \"S3\":%d,\
@@ -155,32 +155,45 @@ input:
 \"r7\":%d,\
 \"r8\":%d\
 }",
-                    SLAVE_Struct.Slave_State[0],
-                    SLAVE_Struct.Slave_State[1],
-                    SLAVE_Struct.Slave_State[2],
-                    SLAVE_Struct.Slave_State[3],
-                    SLAVE_Struct.ReadSpeed1[0],
-                    SLAVE_Struct.ReadSpeed1[1],
-                    SLAVE_Struct.ReadSpeed1[2],
-                    SLAVE_Struct.ReadSpeed1[3],
-                    SLAVE_Struct.ReadSpeed2[0],
-                    SLAVE_Struct.ReadSpeed2[1],
-                    SLAVE_Struct.ReadSpeed2[2],
-                    SLAVE_Struct.ReadSpeed2[3]);
+                SLAVE_Struct.Slave_State[0],
+                SLAVE_Struct.Slave_State[1],
+                SLAVE_Struct.Slave_State[2],
+                SLAVE_Struct.Slave_State[3],
+                SLAVE_Struct.ReadSpeed1[0],
+                SLAVE_Struct.ReadSpeed1[1],
+                SLAVE_Struct.ReadSpeed1[2],
+                SLAVE_Struct.ReadSpeed1[3],
+                SLAVE_Struct.ReadSpeed2[0],
+                SLAVE_Struct.ReadSpeed2[1],
+                SLAVE_Struct.ReadSpeed2[2],
+                SLAVE_Struct.ReadSpeed2[3]);
 
-            if (send(BaiduMapsockfd, strx1, strlen((char *)strx1), 0) < 0)
-            {
-                u1_printf("send failed\r\n");
-                goto input;
-            }
-            Delay(5);
-            if (send(BaiduMapsockfd, strx2, strlen((char *)strx2), 0) < 0)
-            {
-                u1_printf("send failed\r\n");
-                goto input;
-            }
-            Delay(500);
+        if (send(BaiduMapsockfd, strx1, strlen((char *)strx1), 0) < 0)
+        {
+            u1_printf("send failed\r\n");
+            // goto input;
+            send(BaiduMapsockfd, strx1, strlen((char *)strx1), 0);
         }
+        Delay(5);
+        if (send(BaiduMapsockfd, strx2, strlen((char *)strx2), 0) < 0)
+        {
+            u1_printf("send failed\r\n");
+            // goto input;
+            send(BaiduMapsockfd, strx2, strlen((char *)strx2), 0);
+        }
+        // Delay(300);
+
+        memset(TCPrxBuf3, 0, sizeof(TCPrxBuf3));
+
+            if (recv(BaiduMapsockfd, TCPrxBuf3, sizeof(TCPrxBuf3), 0) < 0)
+            {
+                u1_printf("recive failed\r\n");
+                goto input;
+            }
+            cm_uart_write(CM_UART_DEV_1, TCPrxBuf3, strlen((char*)TCPrxBuf3), 1000);
+
+            memset(TCPrxBuf3, 0, sizeof(TCPrxBuf3));
+            Delay(350);
     }
 
     close(BaiduMapsockfd);

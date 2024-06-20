@@ -86,11 +86,6 @@ void ParsingCORS(const char *string)
     }
 
     ParseCORS((char *)string, 4);
-
-    u1_printf("%s\r\n", CORS_Struct.Corsipstr);
-    u1_printf("%d\r\n", CORS_Struct.CORSport);
-    u1_printf("%s\r\n", CORS_Struct.CORSMount);
-    u1_printf("%s\r\n", CORS_Struct.AccPassCiphertext);
 }
 
 void ParseCORS(const char *string, int n)

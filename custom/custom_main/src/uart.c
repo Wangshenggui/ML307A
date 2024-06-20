@@ -48,8 +48,6 @@ void u0_read(char *param)
             extractFirstxxx(u0_receive, (char *)GGAString, sizeof GGAString, "$GNGGA");
             // 分离RMC消息
             extractFirstxxx(u0_receive, (char *)RMCString, sizeof RMCString, "$GNRMC");
-            // // 打印测试
-            // u1_printf("--%s\n", GGAString);
         }
         Delay(200);
     }
@@ -70,19 +68,15 @@ void u1_read(char *param)
             extractFirstxxx(u1_receive, (char *)CORSString, sizeof CORSString, "$CORS");
             extractFirstxxx(u1_receive, (char *)SLAVEString, sizeof SLAVEString, "$SLAVE");
 
-            u1_printf("u1_receive>>>%s\n", u1_receive);
-
             if (CORSString[0] == '$' && CORSString[1] == 'C' && CORSString[2] == 'O' && CORSString[3] == 'R' && CORSString[4] == 'S')
             {
-                u1_printf("CORSString>>>%s\n", CORSString);
                 ParsingCORS((char *)CORSString);
             }
             else if (SLAVEString[0] == '$' && SLAVEString[1] == 'S' && SLAVEString[2] == 'L' && SLAVEString[3] == 'A' && SLAVEString[4] == 'V' && SLAVEString[5] == 'E')
             {
-                u1_printf("SLAVEString>>>%s\n", SLAVEString);
                 for (int i = 1; i < 24; i++)
                 {
-                    ParseSLAVE(SLAVEString, i);
+                    ParseSLAVE((char*)SLAVEString, i);
                 }
             }
         }

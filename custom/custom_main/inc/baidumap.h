@@ -8,6 +8,7 @@
 
 void UpBaiduMap(void);
 void print_ipv4_addressBauduMap(const char* hostname);
+int send_with_retry(int sockfd, const char *data, size_t length);
 void CreateBaiduMapSocket(void);
 
 

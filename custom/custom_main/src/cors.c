@@ -65,8 +65,9 @@ void GetCors(void)
             }
             cm_uart_write(CM_UART_DEV_0, TCPrxBuf2, sizeof(TCPrxBuf2), 1000);
             
-            Delay(1000);
+            Delay(500);
         }
+        Delay(100);
     }
 
     while(1)

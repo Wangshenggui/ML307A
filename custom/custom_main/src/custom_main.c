@@ -41,10 +41,10 @@ int cm_opencpu_entry(char *param)
     uart1_init();
 
     /*创建任务*/
-    osThreadCreat("u0_read", (void *)u0_read, 8, 2000); // 打开串口读取线程
-    osThreadCreat("u1_read", (void *)u1_read, 7, 2000); // 打开串口读取线程
-    osThreadCreat("GetCors", (void*)GetCors, 4, 4000); // 打开获取差分数据线程
-    osThreadCreat("UpBaidu", (void*)UpBaiduMap, 3, 4000); // 打开上传位置线程
+    osThreadCreat("u0_read", (void *)u0_read, 5, 2000); // 打开串口读取线程
+    osThreadCreat("u1_read", (void *)u1_read, 6, 2000); // 打开串口读取线程
+    osThreadCreat("GetCors", (void*)GetCors, 7, 4000); // 打开获取差分数据线程
+    osThreadCreat("UpBaidu", (void*)UpBaiduMap, 8, 4000); // 打开上传位置线程
 
     return 0;
 }
