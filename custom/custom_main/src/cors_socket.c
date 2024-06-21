@@ -9,21 +9,21 @@
 #include "sockets.h"
 #include <mcu_uart.h>
 
-//创建Cors嵌套字
+// 创建Cors嵌套字
 int Corssockfd;
 struct sockaddr_in Corsserv_addr;
 char Corsipstr[20];
 
+// 要接收的缓存
+uint8_t CorsSocketTCPRxBuf[400];
 
-
-uint8_t TCPrxBuf1[400];
-
+// 操作计数1
 int count1 = 0;
 
-
-void print_ipv4_addressCors(const char* hostname)
+// 查找IPv4地址
+void print_ipv4_addressCors(const char *hostname)
 {
-    struct addrinfo hints, * res, * p;
+    struct addrinfo hints, *res, *p;
     int status;
     int found = 1; // 用于标记是否找到了IPv4地址
 
@@ -32,20 +32,19 @@ void print_ipv4_addressCors(const char* hostname)
     hints.ai_socktype = SOCK_STREAM;
 
     while (found)
-    { 
+    {
         // 无限循环，持续查询并打印IP地址
         status = getaddrinfo(hostname, NULL, &hints, &res);
         if (status != 0)
         {
-            // fprintf(stderr, "getaddrinfo error: %s\n", strerror(status));
             continue; // 查询失败，继续下一次循环
         }
 
         // 遍历返回的结果，直到找到IPv4地址
         for (p = res; p != NULL; p = p->ai_next)
         {
-            struct sockaddr_in* ipv4 = (struct sockaddr_in*)p->ai_addr;
-            if (inet_ntop(AF_INET, &ipv4->sin_addr, (void*)Corsipstr, sizeof Corsipstr) != NULL)
+            struct sockaddr_in *ipv4 = (struct sockaddr_in *)p->ai_addr;
+            if (inet_ntop(AF_INET, &ipv4->sin_addr, (void *)Corsipstr, sizeof Corsipstr) != NULL)
             {
                 found = 0;
                 break; // 找到后退出循环
@@ -56,16 +55,16 @@ void print_ipv4_addressCors(const char* hostname)
     }
 }
 
-
 /*
 Corsipstr       ip
 CORSport        端口
 CORSMount       挂载点
 CORSAccPass     账号密码密文
 */
+// 创建Cors Socket
 void CreateCorsSocket(void)
 {
-    input:
+input:
     print_ipv4_addressCors(CORS_Struct.Corsipstr); // 获取动态IP
     // 创建TCP套接字
     if ((Corssockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
@@ -84,7 +83,7 @@ void CreateCorsSocket(void)
     Corsserv_addr.sin_port = htons(CORS_Struct.CORSport);
 
     // 尝试连接到服务器
-    if (connect(Corssockfd, (struct sockaddr*)&Corsserv_addr, sizeof(Corsserv_addr)) < 0)
+    if (connect(Corssockfd, (struct sockaddr *)&Corsserv_addr, sizeof(Corsserv_addr)) < 0)
     {
         u0_printf("connection failed\n");
         exit(EXIT_FAILURE);
@@ -94,11 +93,13 @@ void CreateCorsSocket(void)
         u0_printf("connection Success\n");
     }
 
+    // 定义发送的数组
     char temp_str[400];
     // 连接成功，可以在此发送和接收数据
-    sprintf((char*)temp_str, "%s%s%s%s%s", "GET /", CORS_Struct.CORSMount, " HTTP/1.0\r\nUser-Agent: NTRIP GNSSInternetRadio/1.4.10\r\nAccept: */*\r\nConnection: close\r\nAuthorization: Basic ", CORS_Struct.AccPassCiphertext, "\r\n\r\n");
+    sprintf((char *)temp_str, "%s%s%s%s%s", "GET /", CORS_Struct.CORSMount, " HTTP/1.0\r\nUser-Agent: NTRIP GNSSInternetRadio/1.4.10\r\nAccept: */*\r\nConnection: close\r\nAuthorization: Basic ", CORS_Struct.AccPassCiphertext, "\r\n\r\n");
 
-    if (send(Corssockfd, temp_str, strlen((char*)temp_str), 0) < 0)
+    // 发送
+    if (send(Corssockfd, temp_str, strlen((char *)temp_str), 0) < 0)
     {
         u0_printf("failed\r\n");
         goto input;
@@ -109,22 +110,25 @@ void CreateCorsSocket(void)
         u0_printf("success\r\n");
     }
 
-    if (recv(Corssockfd, TCPrxBuf1, sizeof(TCPrxBuf1), 0) < 0)
+    // 接收
+    if (recv(Corssockfd, CorsSocketTCPRxBuf, sizeof(CorsSocketTCPRxBuf), 0) < 0)
     {
         u0_printf("receive failed\r\n");
         goto input;
         exit(EXIT_FAILURE);
     }
-    else 
+    else
     {
         u0_printf("receive success\r\n");
     }
 
-    if (strcmp((char*)TCPrxBuf1, "ICY 200 OK\r\n") == 0)
+    // 比较字符串
+    if (strcmp((char *)CorsSocketTCPRxBuf, "ICY 200 OK\r\n") == 0)
     {
         u0_printf("$CORS,OK\r\n");
     }
-    else if (strcmp((char*)TCPrxBuf1, "ERROR - Bad Password\r\n") == 0)
+    // 账号密码错误
+    else if (strcmp((char *)CorsSocketTCPRxBuf, "ERROR - Bad Password\r\n") == 0)
     {
         u0_printf("$CORS,ERRORpassword\r\n");
         count1++;
@@ -137,10 +141,4 @@ void CreateCorsSocket(void)
         }
         goto input;
     }
-
-    
 }
-
-
-
-

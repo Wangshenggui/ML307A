@@ -68,6 +68,7 @@ void u1_read(char *param)
             extractFirstxxx(u1_receive, (char *)CORSString, sizeof CORSString, "$CORS");
             extractFirstxxx(u1_receive, (char *)SLAVEString, sizeof SLAVEString, "$SLAVE");
 
+            // 处理相关信息
             if (CORSString[0] == '$' && CORSString[1] == 'C' && CORSString[2] == 'O' && CORSString[3] == 'R' && CORSString[4] == 'S')
             {
                 ParsingCORS((char *)CORSString);
@@ -76,7 +77,7 @@ void u1_read(char *param)
             {
                 for (int i = 1; i < 24; i++)
                 {
-                    ParseSLAVE((char*)SLAVEString, i);
+                    ParseSLAVE((char *)SLAVEString, i);
                 }
             }
         }

@@ -8,16 +8,18 @@
 #include "cm_pm.h"
 #include "stdlib.h"
 
+// 接收单片机发送的相关信息
 uint8_t CORSString[100];
 uint8_t SLAVEString[100];
 
+// 定义相关结构体，解析单片机发送的数据
 CORS_Structure CORS_Struct;
 SLAVE_Structure SLAVE_Struct;
 
 // 裁剪字符串
 static char *substring(char *dst, char *src, int start, int len)
 {
-    int length = 1000; // ×î´ó³¤¶È
+    int length = 1000; // 最大长度
     if (start >= length || start < 0)
         return NULL;
     if (len > length)
@@ -31,6 +33,7 @@ static char *substring(char *dst, char *src, int start, int len)
     return dst;
 }
 
+// 解析CORS信息
 void ParsingCORS(const char *string)
 {
     ParseCORS((char *)string, 1);
@@ -88,6 +91,7 @@ void ParsingCORS(const char *string)
     ParseCORS((char *)string, 4);
 }
 
+// 解析CORS的第n个','的数据
 void ParseCORS(const char *string, int n)
 {
     char result[200];
@@ -147,29 +151,23 @@ void ParseCORS(const char *string, int n)
 
         switch (n)
         {
-
         case (1): // 域名号
-
             CORS_Struct.Domain = result[0];
-            //   u1_printf("CORS_Struct.Domain :%c\n", CORS_Struct.Domain );
             break;
-
         case (2): // 端口号
             CORS_Struct.Port = result[0];
             break;
         case (3): // 挂载点号
             CORS_Struct.Mount = atoi(result);
-            //   CORS_Struct.Mount = result[0];
             break;
-
         case (4): // 密文
             sprintf(CORS_Struct.AccPassCiphertext, "%s", result);
-            // u0_printf("@%s\n",CORS_Struct.accpass);
             break;
         }
     }
 }
 
+// 解析SLAVE
 void ParseSLAVE(const char *string, int n)
 {
     char result[200];

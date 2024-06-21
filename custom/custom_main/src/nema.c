@@ -3,14 +3,17 @@
 #include "stdlib.h"
 #include "stdio.h"
 
+// 定义GGA和RMC数组
 uint8_t GGAString[100];
 uint8_t RMCString[100];
 
+// 定义相关结构体
 GPGGA_Structure GPGGA_Struct;
 GPRMC_Structure GPRMC_Struct;
 
-#define MAX_LINE_LENGTH 256
+// #define MAX_LINE_LENGTH 256
 
+// 提取gga_start参数开头的信息，\r\n结束
 int extractFirstxxx(const char *data, char *result, size_t result_size, char *gga_start)
 {
     const char *ptr = data;
@@ -71,6 +74,8 @@ static char *substring(char *dst, char *src, int start, int len)
     *(dst++) = '\0';
     return dst;
 }
+
+// 解析GGA信息
 void ParseGPGGA(const char *string, int n)
 {
     char result[200];
@@ -165,6 +170,7 @@ void ParseGPGGA(const char *string, int n)
     }
 }
 
+// 解析RMC信息
 void ParseGPRMC(const char *string, int n)
 {
     char result[200];

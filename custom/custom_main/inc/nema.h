@@ -58,9 +58,8 @@ typedef struct
 } GPRMC_Structure;
 extern GPRMC_Structure GPRMC_Struct;
 
-int extractFirstxxx(const char *data, char *result, size_t result_size,char *gga_start);
+int extractFirstxxx(const char *data, char *result, size_t result_size, char *gga_start);
 void ParseGPGGA(const char *string, int n);
 void ParseGPRMC(const char *string, int n);
-
 
 #endif

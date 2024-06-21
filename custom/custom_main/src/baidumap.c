@@ -17,36 +17,35 @@ int BaiduMapsockfd;
 struct sockaddr_in BaiduMapserv_addr;
 char Baiduipstr[20];
 
+// 要发送的信息
 char strx1[200];
 char strx2[200];
 
+// 要接收的缓存
 uint8_t BaiduTCPRxBuf[200];
 
+// 定义坐标转换
 double wgs84_lon = 0;
 double wgs84_lat = 0;
+// double gcj02_lon = 0;
+// double gcj02_lat = 0;
+// double bd09_lon = 0;
+// double bd09_lat = 0;
 
-double gcj02_lon = 0;
-double gcj02_lat = 0;
-
-double bd09_lon = 0;
-double bd09_lat = 0;
-
+// 百度地图上传任务
 void UpBaiduMap(void)
 {
+    // 等待网络连接
     while (cm_modem_get_pdp_state(1) != 1)
     {
         Delay(100);
     }
 
+    // 创建BaiduMap Socket
     CreateBaiduMapSocket();
-
-    while (1)
-    {
-        u1_printf("666666666\r\n");
-        Delay(100);
-    }
 }
 
+// 查找IPv4地址
 void print_ipv4_addressBauduMap(const char *hostname)
 {
     struct addrinfo hints, *res, *p;
@@ -63,7 +62,6 @@ void print_ipv4_addressBauduMap(const char *hostname)
         status = getaddrinfo(hostname, NULL, &hints, &res);
         if (status != 0)
         {
-            // fprintf(stderr, "getaddrinfo error: %s\n", strerror(status));
             continue; // 查询失败，继续下一次循环
         }
 
@@ -82,6 +80,7 @@ void print_ipv4_addressBauduMap(const char *hostname)
     }
 }
 
+// 创建BaiduMap Socket
 void CreateBaiduMapSocket(void)
 {
 input:
@@ -109,6 +108,7 @@ input:
     // 连接成功，可以在此发送和接收数据
     while (1)
     {
+        // 解析RTK信息
         ParseGPGGA((char *)GGAString, 2);
         ParseGPGGA((char *)GGAString, 4);
         ParseGPGGA((char *)GGAString, 6);
@@ -117,6 +117,7 @@ input:
 
         ParseGPRMC((char *)RMCString, 7);
 
+        // 坐标转换
         wgs84_lon = dms_to_degrees(GPGGA_Struct.Longitude);
         wgs84_lat = dms_to_degrees(GPGGA_Struct.Latitude);
 
@@ -126,6 +127,7 @@ input:
         // bd09_lon = gcj02tobd09(gcj02_lon, gcj02_lat).longitude;
         // bd09_lat = gcj02tobd09(gcj02_lon, gcj02_lat).latitude;
 
+        // 格式化要发送的信息
         sprintf(strx1, "\
 {\"lon\":%0.10lf,\
 \"lat\":%0.10lf,\
@@ -168,6 +170,7 @@ input:
                 SLAVE_Struct.ReadSpeed2[2],
                 SLAVE_Struct.ReadSpeed2[3]);
 
+        // 发送信息
         if (send(BaiduMapsockfd, strx1, strlen((char *)strx1), 0) < 0)
         {
             u1_printf("send failed\r\n");
@@ -178,21 +181,22 @@ input:
             u1_printf("send failed\r\n");
         }
 
+        // 接收下发的信息
         memset(BaiduTCPRxBuf, 0, sizeof(BaiduTCPRxBuf));
         if (recv(BaiduMapsockfd, BaiduTCPRxBuf, sizeof(BaiduTCPRxBuf), 0) < 0)
         {
             u1_printf("recive failed\r\n");
         }
-        // {"lon":106.6084217770,"lat":26.3834987512,"rtksta":5,"speed":0.192608,"HCSDS":12,"alti":1210.25}
-        // {"S1":0,"S2":0,"S3":0,"S4":0,"r1":0,"r2":0,"r3":0,"r4":0,"r5":0,"r6":0,"r7":0,"r8":0}
-        if (!((BaiduTCPRxBuf[1] == '\"' && BaiduTCPRxBuf[2] == 'l' && BaiduTCPRxBuf[3] == 'o' && BaiduTCPRxBuf[4] == 'n' && BaiduTCPRxBuf[5] == '\"') 
-        || (BaiduTCPRxBuf[1] == '\"' && BaiduTCPRxBuf[2] == 'S' && BaiduTCPRxBuf[3] == '1' && BaiduTCPRxBuf[4] == '\"')))
+        // 筛选有用的信息
+        if (!((BaiduTCPRxBuf[1] == '\"' && BaiduTCPRxBuf[2] == 'l' && BaiduTCPRxBuf[3] == 'o' && BaiduTCPRxBuf[4] == 'n' && BaiduTCPRxBuf[5] == '\"') || (BaiduTCPRxBuf[1] == '\"' && BaiduTCPRxBuf[2] == 'S' && BaiduTCPRxBuf[3] == '1' && BaiduTCPRxBuf[4] == '\"')))
         {
+            // 将控制信息向外发送
             cm_uart_write(CM_UART_DEV_1, BaiduTCPRxBuf, strlen((char *)BaiduTCPRxBuf), 1000);
         }
 
         Delay(350);
     }
 
+    // 关闭BaiduMapsockfd
     close(BaiduMapsockfd);
 }
