@@ -20,7 +20,7 @@ char Baiduipstr[20];
 char strx1[200];
 char strx2[200];
 
-uint8_t TCPrxBuf3[400];
+uint8_t BaiduTCPRxBuf[200];
 
 double wgs84_lon = 0;
 double wgs84_lat = 0;
@@ -171,29 +171,27 @@ input:
         if (send(BaiduMapsockfd, strx1, strlen((char *)strx1), 0) < 0)
         {
             u1_printf("send failed\r\n");
-            // goto input;
-            send(BaiduMapsockfd, strx1, strlen((char *)strx1), 0);
         }
         Delay(5);
         if (send(BaiduMapsockfd, strx2, strlen((char *)strx2), 0) < 0)
         {
             u1_printf("send failed\r\n");
-            // goto input;
-            send(BaiduMapsockfd, strx2, strlen((char *)strx2), 0);
         }
-        // Delay(300);
 
-        memset(TCPrxBuf3, 0, sizeof(TCPrxBuf3));
+        memset(BaiduTCPRxBuf, 0, sizeof(BaiduTCPRxBuf));
+        if (recv(BaiduMapsockfd, BaiduTCPRxBuf, sizeof(BaiduTCPRxBuf), 0) < 0)
+        {
+            u1_printf("recive failed\r\n");
+        }
+        // {"lon":106.6084217770,"lat":26.3834987512,"rtksta":5,"speed":0.192608,"HCSDS":12,"alti":1210.25}
+        // {"S1":0,"S2":0,"S3":0,"S4":0,"r1":0,"r2":0,"r3":0,"r4":0,"r5":0,"r6":0,"r7":0,"r8":0}
+        if (!((BaiduTCPRxBuf[1] == '\"' && BaiduTCPRxBuf[2] == 'l' && BaiduTCPRxBuf[3] == 'o' && BaiduTCPRxBuf[4] == 'n' && BaiduTCPRxBuf[5] == '\"') 
+        || (BaiduTCPRxBuf[1] == '\"' && BaiduTCPRxBuf[2] == 'S' && BaiduTCPRxBuf[3] == '1' && BaiduTCPRxBuf[4] == '\"')))
+        {
+            cm_uart_write(CM_UART_DEV_1, BaiduTCPRxBuf, strlen((char *)BaiduTCPRxBuf), 1000);
+        }
 
-            if (recv(BaiduMapsockfd, TCPrxBuf3, sizeof(TCPrxBuf3), 0) < 0)
-            {
-                u1_printf("recive failed\r\n");
-                goto input;
-            }
-            cm_uart_write(CM_UART_DEV_1, TCPrxBuf3, strlen((char*)TCPrxBuf3), 1000);
-
-            memset(TCPrxBuf3, 0, sizeof(TCPrxBuf3));
-            Delay(350);
+        Delay(350);
     }
 
     close(BaiduMapsockfd);
